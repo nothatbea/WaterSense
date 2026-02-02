@@ -102,7 +102,7 @@ function showNotification(message, type = "info") {
   const toast = document.createElement("div");
   toast.className = `
     notification-toast
-    fixed top-4 right-4 z-50 max-w-sm
+    fixed top-4 right-4 z-[9999] max-w-sm
     alert alert-${type}
     animate-slide-in-right
   `;
@@ -130,6 +130,7 @@ function showNotification(message, type = "info") {
     }
   }, 5000);
 }
+
 
 
 function getNotificationClasses(type) {
