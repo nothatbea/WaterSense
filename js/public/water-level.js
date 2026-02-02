@@ -36,7 +36,7 @@ async function fetchLatestWaterLevel() {
     waterLevelText.textContent = `${level.toFixed(1)} cm`;
     waterFill.style.height = `${percent}%`;
 
-    statusBadge.textContent = row.status;
+    statusBadge.textContent = "";
     statusText.textContent = row.status.toLowerCase();
 
     lastUpdate.textContent = row.created_at;
