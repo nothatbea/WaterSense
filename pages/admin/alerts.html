@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Management - WaterSense Dashboard</title>
+    <link rel="stylesheet" href="../../css/main.css">
+
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Top Navigation Bar -->
+    <nav class="bg-surface border-b border-border shadow-sm sticky top-0 z-50">
+        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+
+                <div class="flex items-center justify-between w-full mr-2">
+                    <!-- Logo and Title - Left Side -->
+                    <div class="flex items-center gap-3">
+                        <!-- Logo - Smaller on mobile -->
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" rx="8" fill="#2563EB"/>
+                            <path d="M20 8C15.5817 8 12 11.5817 12 16C12 20.4183 15.5817 24 20 24C24.4183 24 28 20.4183 28 16C28 11.5817 24.4183 8 20 8Z" fill="white" opacity="0.3"/>
+                            <path d="M12 24H28V32C28 33.1046 27.1046 34 26 34H14C12.8954 34 12 33.1046 12 32V24Z" fill="white"/>
+                            <rect x="18" y="26" width="4" height="6" fill="#2563EB"/>
+                        </svg>
+                        <div>
+                            <!-- Title - Smaller on mobile -->
+                            <h1 class="text-base sm:text-lg font-semibold text-text-primary">WaterSense</h1>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Button - Visible on mobile -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-md text-text-secondary hover:text-primary hover:bg-secondary-50 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+
+                    <!-- Desktop Navigation Links - Hidden on mobile -->
+                    <div class="hidden md:flex items-center gap-6">
+                        <a href="dashboard.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
+                        <a href="sensors.html" class="text-text-secondary hover:text-primary transition-colors">Sensors</a>
+                        <a href="alerts.html" class="text-primary font-medium border-b-2 border-primary pb-1">Alerts</a>
+                        <a href="users.html" class="text-text-secondary hover:text-primary transition-colors">Users</a>
+                        <a href="residents.html" class="text-text-secondary hover:text-primary transition-colors">Residents</a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Overlay -->
+                <div id="mobileMenu" class="md:hidden hidden fixed top-1/3 right-4 -translate-y-1/2 w-72 bg-surface border border-border shadow-lg rounded-xl z-50">
+
+                    <div class="h-[64px] border-b border-border flex items-center px-4">
+                        <span class="text-lg font-semibold text-primary">Menu</span>
+                    </div>
+
+                    <div class="px-4 py-4 space-y-2">
+                        <a href="dashboard.html"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition">
+                            Dashboard
+                        </a>
+
+                        <a href="sensors.html"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition">
+                            Sensors
+                        </a>
+
+                        <a href="alerts.html"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-50 text-primary font-medium">
+                            Alerts
+                        </a>
+
+                        <a href="users.html"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition">
+                            Users
+                        </a>
+
+                        <a href="residents.html"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition">
+                            Residents
+                        </a>
+                    </div>
+                </div>
+
+
+
+                <!-- User Profile -->
+                <div class="flex items-center gap-3 mr-2 sm:mr-0">
+                    <div class="hidden sm:block text-right">
+
+                    </div>
+                    
+                    <img src="https://l1nq.com/Pznvy" alt="LGU staff member profile picture" 
+                        class="w-10 h-10 rounded-full border-2 border-primary" 
+                        onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                    
+                    <button id="logoutBtn" class="btn btn-outline py-2 px-3 text-sm min-h-[44px] mr-2 sm:mr-0" 
+                            onclick="window.location.href='../auth/login.html'">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                        <span class="hidden xs:inline">Logout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Control Bar -->
+    <div class="bg-surface border-b border-border">
+        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <!-- Alert Filters -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="flex items-center gap-2">
+                        <label class="text-sm font-medium text-text-secondary">Status:</label>
+                        <select id="alertStatusFilter" class="input py-2 px-3 min-h-[44px] cursor-pointer">
+                            <option value="all">All Alerts</option>
+                            <option value="active" selected>Active Only</option>
+                            <option value="resolved">Resolved</option>
+                            <option value="acknowledged">Acknowledged</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <label class="text-sm font-medium text-text-secondary">Severity:</label>
+                        <select id="alertSeverityFilter" class="input py-2 px-3 min-h-[44px] cursor-pointer">
+                            <option value="all">All Severities</option>
+                            <option value="critical">Critical</option>
+                            <option value="warning" selected>Warning</option>
+                            <option value="info">Info</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Alert Actions -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <button id="acknowledgeAllBtn" class="btn btn-outline flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Acknowledge All
+                    </button>
+                    
+                    <button id="exportAlertsBtn" class="btn btn-outline flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Export History
+                    </button>
+                    
+                    <button id="testAlertBtn" class="btn btn-primary flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Test Alert
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Two-column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Column: Alert Configuration -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Alert Thresholds Card -->
+                <div class="card card-comfortable">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary">Alert Thresholds</h3>
+                            <p class="text-sm text-text-secondary">Configure warning and critical levels</p>
+                        </div>
+                        <button id="saveThresholdsBtn" class="btn btn-primary">
+                            Save Changes
+                        </button>
+                    </div>
+
+                    <!-- Barangay Lingga Thresholds -->
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-semibold text-text-primary">Barangay Lingga</h4>
+                            <span class="text-sm text-text-secondary">Sensor: LM-LIN-001</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-3 h-3 bg-warning-500 rounded-full"></div>
+                                        <span>Warning Level (cm)</span>
+                                    </div>
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" id="linggaWarning" min="50" max="150" value="90" class="flex-1" step="1">
+                                    <div class="w-20">
+                                        <input type="number" id="linggaWarningInput" value="90" min="50" max="150" class="input text-center py-2">
+                                    </div>
+                                </div>
+                                <div class="flex justify-between text-xs text-text-secondary mt-1">
+                                    <span>50cm</span>
+                                    <span>Current: 90cm</span>
+                                    <span>150cm</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-3 h-3 bg-error-500 rounded-full"></div>
+                                        <span>Critical Level (cm)</span>
+                                    </div>
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" id="linggaCritical" min="80" max="200" value="120" class="flex-1" step="1">
+                                    <div class="w-20">
+                                        <input type="number" id="linggaCriticalInput" value="120" min="80" max="200" class="input text-center py-2">
+                                    </div>
+                                </div>
+                                <div class="flex justify-between text-xs text-text-secondary mt-1">
+                                    <span>80cm</span>
+                                    <span>Current: 120cm</span>
+                                    <span>200cm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Threshold Legend -->
+                    <div class="mt-6 pt-6 border-t border-border">
+                        <h5 class="text-sm font-medium text-text-primary mb-2">Status Legend</h5>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-success-500 rounded-full"></div>
+                                <span class="text-sm text-text-secondary">Normal: Below warning level</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-warning-500 rounded-full"></div>
+                                <span class="text-sm text-text-secondary">Warning: Above warning level</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-error-500 rounded-full"></div>
+                                <span class="text-sm text-text-secondary">Critical: Above critical level</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alert Statistics -->
+                <div class="card card-compact">
+                    <h4 class="font-semibold text-text-primary mb-3">Alert Statistics (24h)</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-error-500 rounded-full"></div>
+                                <span class="text-sm text-text-secondary">Critical Alerts</span>
+                            </div>
+                            <span class="font-semibold text-text-primary">1</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-warning-500 rounded-full"></div>
+                                <span class="text-sm text-text-secondary">Warning Alerts</span>
+                            </div>
+                            <span class="font-semibold text-text-primary">3</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-accent-500 rounded-full"></div>
+                                <span class="text-sm text-text-secondary">Info Alerts</span>
+                            </div>
+                            <span class="font-semibold text-text-primary">7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Alerts Display -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Active Alerts -->
+                <div class="card card-comfortable">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary">Active Alerts</h3>
+                            <p class="text-sm text-text-secondary">Unacknowledged alerts requiring attention</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="status-indicator status-caution status-pulse"></span>
+                            <span class="text-sm font-medium text-text-primary">1 Active Alert</span>
+                        </div>
+                    </div>
+
+                    <!-- Active Alerts List -->
+                    <div class="space-y-3">
+                        <!-- Barangay Lingga Warning Alert -->
+                        <div class="alert alert-warning flex items-start gap-3">
+                            <div class="flex-shrink-0">
+                                <input type="checkbox" class="rounded border-border text-warning-600 focus:ring-warning-500">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-start justify-between">
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-semibold">Barangay Lingga</h4>
+                                            <span class="badge badge-warning">Warning</span>
+                                        </div>
+                                        <p class="text-sm">Water level reached 105 cm</p>
+                                        <p class="text-xs text-text-secondary mt-2">2025-11-20 14:30</p>
+                                    </div>
+                                    <button class="btn btn-outline py-1 px-3 text-sm ml-4 acknowledge-btn" data-alert-id="alert1">
+                                        Acknowledge
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Empty State (when no active alerts) -->
+                        <div id="noActiveAlerts" class="hidden text-center py-8">
+                            <div class="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-success-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-semibold text-text-primary mb-2">No Active Alerts</h4>
+                            <p class="text-text-secondary">All alerts are currently acknowledged or resolved.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alert History -->
+                <div class="card card-comfortable">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary">Alert History</h3>
+                            <p class="text-sm text-text-secondary">Recent alerts from the past 7 days</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <select id="historyDaysFilter" class="input py-2 px-3 min-h-[44px] cursor-pointer">
+                                <option value="1">Last 24 hours</option>
+                                <option value="7" selected>Last 7 days</option>
+                                <option value="30">Last 30 days</option>
+                                <option value="90">Last 90 days</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Alert History List -->
+                    <div class="space-y-3 max-h-96 overflow-y-auto">
+                        <!-- Barangay Lingga Warning Alert -->
+                        <div class="border border-border rounded-md p-4">
+                            <div class="flex items-start justify-between">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-2 h-2 bg-warning-500 rounded-full mt-2"></div>
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-semibold">Barangay Lingga</h4>
+                                            <span class="badge badge-warning">Warning</span>
+                                        </div>
+                                        <p class="text-sm">Water level reached 105 cm</p>
+                                        <p class="text-xs text-text-secondary mt-2">2025-11-20 14:30</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs bg-warning-100 text-warning-800 px-2 py-1 rounded">Active</span>
+                            </div>
+                        </div>
+
+                        <!-- Barangay Lingga Warning Alert -->
+                        <div class="border border-border rounded-md p-4">
+                            <div class="flex items-start justify-between">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-2 h-2 bg-warning-500 rounded-full mt-2"></div>
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-semibold">Barangay Lingga</h4>
+                                            <span class="badge badge-warning">Warning</span>
+                                        </div>
+                                        <p class="text-sm">Rapid water level increase detected</p>
+                                        <p class="text-xs text-text-secondary mt-2">2025-11-20 12:45</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs bg-success-100 text-success-800 px-2 py-1 rounded">Resolved</span>
+                            </div>
+                        </div>
+
+                        <!-- Barangay Lingga Critical Alert -->
+                        <div class="border border-border rounded-md p-4">
+                            <div class="flex items-start justify-between">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-2 h-2 bg-error-500 rounded-full mt-2"></div>
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-semibold">Barangay Lingga</h4>
+                                            <span class="badge badge-error">Critical</span>
+                                        </div>
+                                        <p class="text-sm">Water level reached 122 cm</p>
+                                        <p class="text-xs text-text-secondary mt-2">2025-11-19 18:20</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs bg-success-100 text-success-800 px-2 py-1 rounded">Resolved</span>
+                            </div>
+                        </div>
+
+                        <!-- Barangay Lingga Info Alert -->
+                        <div class="border border-border rounded-md p-4">
+                            <div class="flex items-start justify-between">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-2 h-2 bg-accent-500 rounded-full mt-2"></div>
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-semibold">Barangay Lingga</h4>
+                                            <span class="badge badge-info">Info</span>
+                                        </div>
+                                        <p class="text-sm">Sensor calibration completed</p>
+                                        <p class="text-xs text-text-secondary mt-2">2025-11-19 10:00</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs bg-accent-100 text-accent-800 px-2 py-1 rounded">Acknowledged</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Load More Button -->
+                    <div class="text-center mt-6 pt-4 border-t border-border">
+                        <button id="loadMoreAlerts" class="btn btn-outline">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            Load More History
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Alert Configuration Summary -->
+                <div class="card card-comfortable">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Alert Settings Summary</h3>
+                        <button id="editSettingsBtn" class="btn btn-outline">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                            </svg>
+                            Edit Settings
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-secondary-50 rounded-md p-4">
+                            <h4 class="font-semibold text-text-primary mb-2">Notification Channels</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Email Notifications</span>
+                                    <span class="badge badge-success">Enabled</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">SMS Alerts</span>
+                                    <span class="badge badge-success">Enabled</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Push Notifications</span>
+                                    <span class="badge badge-success">Enabled</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-secondary-50 rounded-md p-4">
+                            <h4 class="font-semibold text-text-primary mb-2">Alert Escalation</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Auto-escalation</span>
+                                    <span class="badge badge-warning">2 hours</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Max Retries</span>
+                                    <span class="text-sm font-medium text-text-primary">3</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Cooldown Period</span>
+                                    <span class="text-sm font-medium text-text-primary">15 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-border mt-12">
+        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-text-secondary">
+                    © 2025 WaterSense Dashboard. All Rights Reserved.
+                </p>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="text-sm text-text-secondary hover:text-primary">Documentation</a>
+                    <a href="#" class="text-sm text-text-secondary hover:text-primary">Support</a>
+                    <a href="#" class="text-sm text-text-secondary hover:text-primary">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ✅ ALERTS LOGIC -->
+    <script src="../../js/admin/alerts.js"></script>
+
+    <!-- ✅ SHARED MENU -->
+    <script src="../../js/shared/menu.js"></script>
+
+</body>
+</html>
