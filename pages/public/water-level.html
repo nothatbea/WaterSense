@@ -28,7 +28,7 @@
                     <!-- Current Time -->
                     <div class="text-right hidden sm:block">
                         <p class="text-xs text-text-secondary">Last Updated</p>
-                        <p class="text-sm font-medium text-text-primary" id="currentTime">12/13/2025 12:32 AM</p>
+                        <p class="text-sm font-medium text-text-primary" id="lastUpdate">12/13/2025 12:32 AM</p>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     
                     <!-- Water Level Bar -->
                     <div class="relative w-24 sm:w-32 h-full bg-secondary-200 rounded-md overflow-hidden">
-                        <div id="waterLevelBar" class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-warning-500 to-warning-400 animate-water-rise transition-all duration-1000" style="height: 0%;">
+                        <div id="waterFill" class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-warning-500 to-warning-400 animate-water-rise transition-all duration-1000" style="height: 0%;">
                             <div class="absolute inset-0 bg-white opacity-20 animate-pulse"></div>
                         </div>
                         <!-- Threshold Lines -->
@@ -89,6 +89,7 @@
                     <div class="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2">
                         <div id="statusIndicator" class="flex flex-col items-center gap-2">
                             <div class="status-indicator status-caution status-pulse w-6 h-6"></div>
+                            <span id="statusText">--</span>
                             <span class="text-xs font-medium text-warning-700 uppercase tracking-wide">caution</span>
                         </div>
                     </div>
@@ -97,11 +98,12 @@
 
             <!-- Current Reading -->
             <div class="text-center">
-                <p id="waterLevelValue" class="data-value text-warning-600 text-4xl sm:text-5xl">0 cm</p>
+                <p id="waterLevelText" class="data-value text-warning-600 text-4xl sm:text-5xl">0 cm</p>
                 <p class="data-label mt-2">Current Water Level</p>
                 <p class="text-sm text-text-secondary mt-3">Stay alert. Prepare for possible evacuation if levels continue rising.</p>
             </div>
         </div>
+        <span id="statusBadge" class="hidden"></span>
 
         <!-- SMS Alert Signup -->
         <div class="card card-comfortable">
