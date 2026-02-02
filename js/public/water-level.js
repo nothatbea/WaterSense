@@ -1,58 +1,53 @@
 const API_URL = "https://steelblue-skunk-833121.hostingersite.com/api/sensors/latest.php";
 
 async function fetchLatestWaterLevel() {
+
+  // ===== DOM LOOKUPS =====
+  const waterLevelText = document.getElementById("waterLevelText");
+  const waterFill = document.getElementById("waterFill");
+  const statusBadge = document.getElementById("statusBadge");
+  const lastUpdate = document.getElementById("lastUpdate");
+  const statusText = document.getElementById("statusText");
+
+  // ===== SAFETY GUARD =====
+  if (!waterLevelText || !waterFill || !statusBadge || !lastUpdate || !statusText) {
+    console.warn("Water-level elements missing in DOM. Skipping update.");
+    return;
+  }
+
   try {
+    // ===== FETCH DATA =====
     const res = await fetch(API_URL);
     if (!res.ok) throw new Error("API not reachable");
 
     const data = await res.json();
-    if (!data.length) return;
+    if (!Array.isArray(data) || data.length === 0) return;
 
     const row = data[0];
 
-    const level = parseFloat(row.water_level);
+    // ===== PARSE LEVEL =====
+    let level = parseFloat(row.water_level);
+    if (isNaN(level)) level = 0;
+
     const maxHeight = 180; // cm
-    const percent = Math.min((level / maxHeight) * 100, 100);
+    const percent = Math.min(Math.max((level / maxHeight) * 100, 0), 100);
 
-    // Update text
-    document.getElementById("waterLevelValue").textContent = `${level} cm`;
-    document.getElementById("locationName").textContent = row.location_name;
-    document.getElementById("currentTime").textContent =
-      new Date(row.created_at).toLocaleString();
+    // ===== UPDATE UI =====
+    waterLevelText.textContent = `${level.toFixed(1)} cm`;
+    waterFill.style.height = `${percent}%`;
 
-    // Update bar
-    const bar = document.getElementById("waterLevelBar");
-    bar.style.height = `${percent}%`;
+    statusBadge.textContent = row.status;
+    statusText.textContent = row.status.toLowerCase();
 
-    // Status logic
-    const banner = document.getElementById("statusBanner");
-    const indicator = document.getElementById("statusIndicator");
-
-    if (percent >= 80) {
-      banner.className = "alert alert-error";
-      indicator.innerHTML = `
-        <div class="status-indicator status-danger status-pulse w-6 h-6"></div>
-        <span class="text-xs font-medium text-error-700 uppercase">danger</span>`;
-    } else if (percent >= 60) {
-      banner.className = "alert alert-warning";
-      indicator.innerHTML = `
-        <div class="status-indicator status-caution status-pulse w-6 h-6"></div>
-        <span class="text-xs font-medium text-warning-700 uppercase">caution</span>`;
-    } else {
-      banner.className = "alert alert-success";
-      indicator.innerHTML = `
-        <div class="status-indicator status-safe w-6 h-6"></div>
-        <span class="text-xs font-medium text-success-700 uppercase">normal</span>`;
-    }
+    lastUpdate.textContent = row.created_at;
 
   } catch (err) {
     console.error("Failed to fetch water level:", err.message);
   }
 }
 
-// Initial load
+// ===== INITIAL LOAD =====
 fetchLatestWaterLevel();
 
-// Auto refresh every 10s
-setInterval(fetchLatestWaterLevel, 15000);
-
+// ===== AUTO REFRESH =====
+setInterval(fetchLatestWaterLevel, 30000);
