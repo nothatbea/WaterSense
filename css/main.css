@@ -2201,6 +2201,10 @@ h6{
   --tw-text-opacity: 1;
   color: rgb(15 23 42 / var(--tw-text-opacity, 1));
 }
+#statusBadge {
+  display: none !important;
+}
+
 
 @media (min-width: 640px){
   .sm\:block{
