@@ -117,16 +117,6 @@
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
                 <!-- Filters Section -->
                 <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-                    <!-- Location Filter -->
-                    <div class="flex items-center gap-2">
-                        <label class="text-sm font-medium text-text-secondary whitespace-nowrap">Location:</label>
-                        <select id="locationFilter" class="input py-2 px-3 min-h-[44px] cursor-pointer">
-                            <option value="all">All Locations</option>
-                            <option value="palingon">Barangay Palingon</option>
-                            <option value="lingga">Barangay Lingga</option>
-                        </select>
-                    </div>
-
                     <!-- Status Filter -->
                     <div class="flex items-center gap-2">
                         <label class="text-sm font-medium text-text-secondary whitespace-nowrap">Status:</label>
@@ -135,17 +125,6 @@
                             <option value="online">Online</option>
                             <option value="offline">Offline</option>
                             <option value="maintenance">Maintenance</option>
-                        </select>
-                    </div>
-
-                    <!-- Device Type Filter -->
-                    <div class="flex items-center gap-2">
-                        <label class="text-sm font-medium text-text-secondary whitespace-nowrap">Type:</label>
-                        <select id="typeFilter" class="input py-2 px-3 min-h-[44px] cursor-pointer">
-                            <option value="all">All Types</option>
-                            <option value="water-level">Water Level</option>
-                            <option value="camera">Camera</option>
-                            <option value="weather">Weather Station</option>
                         </select>
                     </div>
 
@@ -160,13 +139,6 @@
 
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap items-center gap-2">
-                    <button id="bulkCalibrate" class="btn btn-outline flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
-                        <span class="hidden sm:inline">Bulk Calibrate</span>
-                    </button>
                     <button id="scheduleMaintenance" class="btn btn-outline flex items-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -186,76 +158,6 @@
 
     <!-- Main Content -->
     <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <!-- Network Health Metrics -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <!-- Total Devices Online -->
-            <div class="card card-compact">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 bg-success-100 rounded-md flex items-center justify-center">
-                        <svg class="w-6 h-6 text-success-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    <span class="status-indicator status-normal status-pulse"></span>
-                </div>
-                <p class="data-value text-success-600">2/2</p>
-                <p class="data-label mt-1">Devices Online</p>
-                <div class="mt-2 flex items-center gap-1 text-xs text-success-600">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M7 14l5-5 5 5z"/>
-                    </svg>
-                    <span>100% uptime</span>
-                </div>
-            </div>
-
-            <!-- Average Uptime -->
-            <div class="card card-compact">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 bg-primary-100 rounded-md flex items-center justify-center">
-                        <svg class="w-6 h-6 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    <svg class="w-16 h-8" viewBox="0 0 64 32" fill="none">
-                        <path d="M0 28 L8 24 L16 26 L24 20 L32 22 L40 18 L48 20 L56 16 L64 18" stroke="#2563EB" stroke-width="2" fill="none"/>
-                    </svg>
-                </div>
-                <p class="data-value text-primary-600">99.6%</p>
-                <p class="data-label mt-1">Average Uptime</p>
-                <p class="text-xs text-text-secondary mt-2">Last 30 days</p>
-            </div>
-
-            <!-- Pending Maintenance -->
-            <div class="card card-compact">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 bg-warning-100 rounded-md flex items-center justify-center">
-                        <svg class="w-6 h-6 text-warning-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                        </svg>
-                    </div>
-                    <span class="badge badge-warning">2 Due</span>
-                </div>
-                <p class="data-value text-warning-600">2</p>
-                <p class="data-label mt-1">Maintenance Alerts</p>
-                <p class="text-xs text-text-secondary mt-2">Next: 01/15/2026</p>
-            </div>
-
-            <!-- Battery Replacement -->
-            <div class="card card-compact">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 bg-accent-100 rounded-md flex items-center justify-center">
-                        <svg class="w-6 h-6 text-accent-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/>
-                        </svg>
-                    </div>
-                    <span class="badge badge-success">Good</span>
-                </div>
-                <p class="data-value text-accent-600">89%</p>
-                <p class="data-label mt-1">Avg Battery Level</p>
-                <p class="text-xs text-text-secondary mt-2">All devices healthy</p>
-            </div>
-        </div>
-
         <!-- Main Content Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <!-- Device Registry Table (12 cols on desktop, full on mobile) -->
@@ -268,7 +170,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
                             </svg>
                         </button>
-                        <span class="text-sm text-text-secondary">2 devices</span>
+                        <span class="text-sm text-text-secondary">1 device</span>
                     </div>
                 </div>
 
@@ -289,14 +191,13 @@
                                 <th class="text-left py-3 px-4 text-sm font-semibold text-text-primary">Location</th>
                                 <th class="text-left py-3 px-4 text-sm font-semibold text-text-primary">Status</th>
                                 <th class="text-left py-3 px-4 text-sm font-semibold text-text-primary">Battery</th>
-                                <th class="text-left py-3 px-4 text-sm font-semibold text-text-primary">Signal</th>
                                 <th class="text-left py-3 px-4 text-sm font-semibold text-text-primary">Last Comm</th>
                                 <th class="text-left py-3 px-4 text-sm font-semibold text-text-primary">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="deviceTableBody">
-                            <!-- Device Row 1 - Palingon -->
-                            <tr class="border-b border-border hover:bg-secondary-50 cursor-pointer device-row" data-device-id="LM-PAL-001">
+                            <!-- Device Row - Lingga -->
+                            <tr class="border-b border-border hover:bg-secondary-50 cursor-pointer device-row" data-device-id="LM-LIN-001">
                                 <td class="py-4 px-2">
                                     <input type="checkbox" class="device-checkbox w-4 h-4 rounded border-border cursor-pointer">
                                 </td>
@@ -304,73 +205,6 @@
                                     <div class="flex items-center gap-2">
                                         <div class="w-8 h-8 bg-success-100 rounded flex items-center justify-center">
                                             <svg class="w-5 h-5 text-success-600" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-text-primary">LM-PAL-001</p>
-                                            <p class="text-xs text-text-secondary">Water Level Sensor</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-4">
-                                    <p class="text-sm text-text-primary">Barangay Palingon</p>
-                                    <p class="text-xs text-text-secondary">Installed: 03/15/2024</p>
-                                </td>
-                                <td class="py-4 px-4">
-                                    <span class="badge badge-success flex items-center gap-1 w-fit">
-                                        <span class="status-indicator status-normal"></span>
-                                        Online
-                                    </span>
-                                </td>
-                                <td class="py-4 px-4">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-full max-w-[80px] bg-secondary-200 rounded-full h-2">
-                                            <div class="bg-success-500 h-2 rounded-full" style="width: 87%"></div>
-                                        </div>
-                                        <span class="text-sm font-medium text-success-600">87%</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-4">
-                                    <div class="flex items-center gap-1">
-                                        <div class="w-1 h-3 bg-success-500 rounded"></div>
-                                        <div class="w-1 h-4 bg-success-500 rounded"></div>
-                                        <div class="w-1 h-5 bg-success-500 rounded"></div>
-                                        <div class="w-1 h-6 bg-success-500 rounded"></div>
-                                        <span class="text-xs font-medium text-success-600 ml-1">Excellent</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-4">
-                                    <p class="text-sm text-text-primary">2 min ago</p>
-                                    <p class="text-xs text-text-secondary">12/13/2025 12:30 AM</p>
-                                </td>
-                                <td class="py-4 px-4">
-                                    <div class="flex items-center gap-2">
-                                        <button class="btn btn-outline py-1 px-2 text-sm" title="View Details">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn btn-outline py-1 px-2 text-sm" title="Calibrate">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <!-- Device Row 2 - Lingga -->
-                            <tr class="border-b border-border hover:bg-secondary-50 cursor-pointer device-row" data-device-id="LM-LIN-001">
-                                <td class="py-4 px-2">
-                                    <input type="checkbox" class="device-checkbox w-4 h-4 rounded border-border cursor-pointer">
-                                </td>
-                                <td class="py-4 px-4">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-8 h-8 bg-warning-100 rounded flex items-center justify-center">
-                                            <svg class="w-5 h-5 text-warning-600" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                                             </svg>
                                         </div>
@@ -399,15 +233,6 @@
                                     </div>
                                 </td>
                                 <td class="py-4 px-4">
-                                    <div class="flex items-center gap-1">
-                                        <div class="w-1 h-3 bg-success-500 rounded"></div>
-                                        <div class="w-1 h-4 bg-success-500 rounded"></div>
-                                        <div class="w-1 h-5 bg-success-500 rounded"></div>
-                                        <div class="w-1 h-6 bg-secondary-300 rounded"></div>
-                                        <span class="text-xs font-medium text-success-600 ml-1">Good</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-4">
                                     <p class="text-sm text-text-primary">1 min ago</p>
                                     <p class="text-xs text-text-secondary">12/13/2025 12:31 AM</p>
                                 </td>
@@ -419,12 +244,6 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                             </svg>
                                         </button>
-                                        <button class="btn btn-outline py-1 px-2 text-sm" title="Calibrate">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                            </svg>
-                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -434,64 +253,13 @@
 
                 <!-- Mobile Card View -->
                 <div class="md:hidden space-y-4">
-                    <!-- Device Card 1 -->
+                    <!-- Device Card - Lingga -->
                     <div class="card card-compact border-l-4 border-success">
                         <div class="flex items-start justify-between mb-3">
                             <div class="flex items-center gap-3">
                                 <input type="checkbox" class="device-checkbox w-4 h-4 rounded border-border cursor-pointer">
                                 <div class="w-10 h-10 bg-success-100 rounded flex items-center justify-center">
                                     <svg class="w-6 h-6 text-success-600" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-text-primary">LM-PAL-001</p>
-                                    <p class="text-xs text-text-secondary">Barangay Palingon</p>
-                                </div>
-                            </div>
-                            <span class="badge badge-success">Online</span>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-3 mb-3">
-                            <div>
-                                <p class="text-xs text-text-secondary mb-1">Battery</p>
-                                <div class="flex items-center gap-2">
-                                    <div class="flex-1 bg-secondary-200 rounded-full h-2">
-                                        <div class="bg-success-500 h-2 rounded-full" style="width: 87%"></div>
-                                    </div>
-                                    <span class="text-xs font-medium text-success-600">87%</span>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="text-xs text-text-secondary mb-1">Signal</p>
-                                <div class="flex items-center gap-1">
-                                    <div class="w-1 h-2 bg-success-500 rounded"></div>
-                                    <div class="w-1 h-3 bg-success-500 rounded"></div>
-                                    <div class="w-1 h-4 bg-success-500 rounded"></div>
-                                    <div class="w-1 h-5 bg-success-500 rounded"></div>
-                                    <span class="text-xs font-medium text-success-600 ml-1">Excellent</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between text-xs text-text-secondary mb-3">
-                            <span>Last Comm: 2 min ago</span>
-                            <span>Installed: 03/15/2024</span>
-                        </div>
-
-                        <div class="flex gap-2">
-                            <button class="btn btn-outline flex-1 py-2">View Details</button>
-                            <button class="btn btn-primary flex-1 py-2">Calibrate</button>
-                        </div>
-                    </div>
-
-                    <!-- Device Card 2 -->
-                    <div class="card card-compact border-l-4 border-success">
-                        <div class="flex items-start justify-between mb-3">
-                            <div class="flex items-center gap-3">
-                                <input type="checkbox" class="device-checkbox w-4 h-4 rounded border-border cursor-pointer">
-                                <div class="w-10 h-10 bg-warning-100 rounded flex items-center justify-center">
-                                    <svg class="w-6 h-6 text-warning-600" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                                     </svg>
                                 </div>
@@ -503,7 +271,7 @@
                             <span class="badge badge-success">Online</span>
                         </div>
                         
-                        <div class="grid grid-cols-2 gap-3 mb-3">
+                        <div class="grid grid-cols-1 gap-3 mb-3">
                             <div>
                                 <p class="text-xs text-text-secondary mb-1">Battery</p>
                                 <div class="flex items-center gap-2">
@@ -511,16 +279,6 @@
                                         <div class="bg-success-500 h-2 rounded-full" style="width: 92%"></div>
                                     </div>
                                     <span class="text-xs font-medium text-success-600">92%</span>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="text-xs text-text-secondary mb-1">Signal</p>
-                                <div class="flex items-center gap-1">
-                                    <div class="w-1 h-2 bg-success-500 rounded"></div>
-                                    <div class="w-1 h-3 bg-success-500 rounded"></div>
-                                    <div class="w-1 h-4 bg-success-500 rounded"></div>
-                                    <div class="w-1 h-5 bg-secondary-300 rounded"></div>
-                                    <span class="text-xs font-medium text-success-600 ml-1">Good</span>
                                 </div>
                             </div>
                         </div>
@@ -531,8 +289,7 @@
                         </div>
 
                         <div class="flex gap-2">
-                            <button class="btn btn-outline flex-1 py-2">View Details</button>
-                            <button class="btn btn-primary flex-1 py-2">Calibrate</button>
+                            <button class="btn btn-primary w-full py-2">View Details</button>
                         </div>
                     </div>
                 </div>
@@ -540,43 +297,93 @@
 
             <!-- Device Detail Panel (4 cols on desktop) -->
             <div class="lg:col-span-4 space-y-4">
-                <!-- Selected Device Info -->
-                <div id="deviceDetailPanel" class="card card-comfortable">
-                    <div class="flex items-center justify-between mb-4">
-                        <h4 class="font-semibold text-text-primary">Device Details</h4>
-                        <button id="closeDetailPanel" class="text-text-secondary hover:text-text-primary">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
+                <!-- Sensor Calibration Card -->
+                <div class="card card-comfortable">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary">Sensor Calibration</h3>
+                            <p class="text-sm text-text-secondary">Adjust sensor readings for accuracy</p>
+                        </div>
+                        <button id="saveCalibrationBtn" class="btn btn-primary py-2 px-3">
+                            Apply
                         </button>
                     </div>
 
-                    <div id="deviceDetailContent">
-                        <div class="text-center py-8 text-text-secondary">
-                            <svg class="w-16 h-16 mx-auto mb-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
-                            <p class="text-sm">Select a device to view details</p>
+                    <!-- Barangay Lingga Calibration -->
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-semibold text-text-primary">Barangay Lingga</h4>
+                            <span class="text-sm text-text-secondary">LM-LIN-001</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <!-- Current Reading -->
+                            <div class="bg-secondary-50 rounded-md p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm font-medium text-text-secondary">Current Reading</span>
+                                    <span class="text-2xl font-bold text-primary-600">93 cm</span>
+                                </div>
+                                <div class="text-xs text-text-secondary">Raw sensor value: 93.2 cm</div>
+                            </div>
+
+                            <!-- Calibration Offset -->
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-2">
+                                    Calibration Offset (cm)
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" id="linggaOffset" min="-10" max="10" value="0" class="flex-1" step="0.1">
+                                    <div class="w-24">
+                                        <input type="number" id="linggaOffsetInput" value="0" min="-10" max="10" step="0.1" class="input text-center py-2">
+                                    </div>
+                                </div>
+                                <div class="flex justify-between text-xs text-text-secondary mt-1">
+                                    <span>-10 cm</span>
+                                    <span>0 cm (no offset)</span>
+                                    <span>+10 cm</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Reference Point Calibration -->
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-2">
+                                    Known Reference Level (cm)
+                                </label>
+                                <p class="text-xs text-text-secondary mb-2">Enter the actual water level measured manually</p>
+                                <div class="flex items-center gap-3">
+                                    <input type="number" id="linggaReference" value="93" min="0" max="200" step="0.1" class="input flex-1 py-2">
+                                    <button id="setReferenceBtn" class="btn btn-outline py-2 px-3">
+                                        Set Reference
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calibration Info -->
+                    <div class="mt-6 pt-6 border-t border-border">
+                        <h5 class="text-sm font-medium text-text-primary mb-2">Calibration Info</h5>
+                        <div class="space-y-2 text-sm text-text-secondary">
+                            <div class="flex items-center justify-between">
+                                <span>Last Calibrated:</span>
+                                <span class="font-medium text-text-primary">12/08/2025 02:15 PM</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Calibrated By:</span>
+                                <span class="font-medium text-text-primary">Admin User</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Status:</span>
+                                <span class="badge badge-success">Calibrated</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Calibration History -->
                 <div class="card card-compact">
-                    <h4 class="font-semibold text-text-primary mb-3">Recent Calibrations</h4>
+                    <h4 class="font-semibold text-text-primary mb-3">Recent Calibration</h4>
                     <div class="space-y-3">
-                        <div class="flex items-start gap-3 pb-3 border-b border-border">
-                            <div class="w-8 h-8 bg-success-100 rounded flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5 text-success-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm font-medium text-text-primary">LM-PAL-001</p>
-                                <p class="text-xs text-text-secondary">Calibrated successfully</p>
-                                <p class="text-xs text-text-secondary mt-1">12/10/2025 10:30 AM</p>
-                            </div>
-                        </div>
                         <div class="flex items-start gap-3">
                             <div class="w-8 h-8 bg-success-100 rounded flex items-center justify-center flex-shrink-0">
                                 <svg class="w-5 h-5 text-success-600" fill="currentColor" viewBox="0 0 24 24">
@@ -587,71 +394,6 @@
                                 <p class="text-sm font-medium text-text-primary">LM-LIN-001</p>
                                 <p class="text-xs text-text-secondary">Calibrated successfully</p>
                                 <p class="text-xs text-text-secondary mt-1">12/08/2025 02:15 PM</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Maintenance Schedule -->
-                <div class="card card-compact">
-                    <h4 class="font-semibold text-text-primary mb-3">Upcoming Maintenance</h4>
-                    <div class="space-y-3">
-                        <div class="flex items-start gap-3 pb-3 border-b border-border">
-                            <div class="w-8 h-8 bg-warning-100 rounded flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5 text-warning-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm font-medium text-text-primary">LM-PAL-001</p>
-                                <p class="text-xs text-text-secondary">Routine maintenance</p>
-                                <p class="text-xs text-warning-600 font-medium mt-1">Due: 01/15/2026</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 bg-warning-100 rounded flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5 text-warning-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm font-medium text-text-primary">LM-LIN-001</p>
-                                <p class="text-xs text-text-secondary">Routine maintenance</p>
-                                <p class="text-xs text-warning-600 font-medium mt-1">Due: 01/20/2026</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Performance Analytics -->
-                <div class="card card-compact">
-                    <h4 class="font-semibold text-text-primary mb-3">Network Performance</h4>
-                    <div class="space-y-3">
-                        <div>
-                            <div class="flex justify-between text-xs mb-1">
-                                <span class="text-text-secondary">Data Accuracy</span>
-                                <span class="font-medium text-success-600">99.2%</span>
-                            </div>
-                            <div class="w-full bg-secondary-200 rounded-full h-2">
-                                <div class="bg-success-500 h-2 rounded-full" style="width: 99.2%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs mb-1">
-                                <span class="text-text-secondary">Response Time</span>
-                                <span class="font-medium text-success-600">98.5%</span>
-                            </div>
-                            <div class="w-full bg-secondary-200 rounded-full h-2">
-                                <div class="bg-success-500 h-2 rounded-full" style="width: 98.5%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs mb-1">
-                                <span class="text-text-secondary">Network Stability</span>
-                                <span class="font-medium text-success-600">99.8%</span>
-                            </div>
-                            <div class="w-full bg-secondary-200 rounded-full h-2">
-                                <div class="bg-success-500 h-2 rounded-full" style="width: 99.8%"></div>
                             </div>
                         </div>
                     </div>
@@ -674,31 +416,18 @@
                 
                 <!-- Map Placeholder -->
                 <div class="relative bg-secondary-100 rounded-md overflow-hidden" style="height: 500px;">
-                    <img src="https://sl1nk.com/1eY1f" alt="Aerial view map showing sensor locations in Barangay Palingon and Lingga lake areas" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                    <img src="https://sl1nk.com/1eY1f" alt="Aerial view map showing sensor location in Barangay Lingga lake area" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
                     
-                    <!-- Map Markers -->
-                    <div class="absolute top-1/3 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
+                    <!-- Map Marker -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                         <div class="relative">
-                            <div class="w-12 h-12 bg-success-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform" title="LM-PAL-001 - Barangay Palingon">
+                            <div class="w-12 h-12 bg-success-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform" title="LM-LIN-001 - Barangay Lingga">
                                 <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                                 </svg>
                             </div>
                             <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-surface px-2 py-1 rounded shadow-md text-xs font-medium">
-                                Palingon
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="absolute top-2/3 right-1/3 transform translate-x-1/2 -translate-y-1/2">
-                        <div class="relative">
-                            <div class="w-12 h-12 bg-warning-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform" title="LM-LIN-001 - Barangay Lingga">
-                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                                </svg>
-                            </div>
-                            <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-surface px-2 py-1 rounded shadow-md text-xs font-medium">
-                                Lingga
+                                Barangay Lingga
                             </div>
                         </div>
                     </div>

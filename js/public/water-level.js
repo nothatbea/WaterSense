@@ -11,7 +11,7 @@ async function fetchLatestWaterLevel() {
     const row = data[0];
 
     const level = parseFloat(row.water_level);
-    const maxHeight = 150; // cm
+    const maxHeight = 180; // cm
     const percent = Math.min((level / maxHeight) * 100, 100);
 
     // Update text
