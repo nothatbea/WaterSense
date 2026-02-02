@@ -100,18 +100,22 @@ function showNotification(message, type = "info") {
   if (existing) existing.remove();
 
   const toast = document.createElement("div");
-  toast.className = `notification-toast fixed top-4 right-4 z-50 max-w-sm p-4 rounded-lg shadow-lg animate-slide-in-right ${getNotificationClasses(
-    type
-  )}`;
+  toast.className = `
+    notification-toast
+    fixed top-4 right-4 z-50 max-w-sm
+    alert alert-${type}
+    animate-slide-in-right
+  `;
 
   toast.innerHTML = `
     <div class="flex items-start gap-3">
-      ${getNotificationIcon(type)}
       <div class="flex-1">
         <p class="text-sm font-medium">${message}</p>
       </div>
-      <button onclick="this.closest('.notification-toast').remove()"
-        class="opacity-70 hover:opacity-100">
+      <button
+        onclick="this.closest('.notification-toast').remove()"
+        class="text-current opacity-70 hover:opacity-100"
+      >
         ✕
       </button>
     </div>
@@ -126,6 +130,7 @@ function showNotification(message, type = "info") {
     }
   }, 5000);
 }
+
 
 function getNotificationClasses(type) {
   return {
