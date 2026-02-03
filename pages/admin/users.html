@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="../../css/main.css">
     <!-- Users Page CSS -->
     <link rel="stylesheet" href="../../css/users.css">
-    <script type="module" async src="https://sl1nk.com/rvNGG"></script>
-    <script type="module" defer src="https://l1nq.com/REegY"></script>
+    
     
 </head>
 <body class="bg-background min-h-screen">
@@ -297,66 +296,7 @@
 
     <script src="../../js/admin/users.js"></script>
 
-    <script>
-
-        let autoRefreshEnabled = true;
-        let refreshInterval;
-
-        document.getElementById('autoRefreshToggle').addEventListener('click', function() {
-            autoRefreshEnabled = !autoRefreshEnabled;
-            const button = this;
-            
-            if (autoRefreshEnabled) {
-                button.classList.remove('btn-outline');
-                button.classList.add('btn-primary');
-                startAutoRefresh();
-            } else {
-                button.classList.remove('btn-primary');
-                button.classList.add('btn-outline');
-                stopAutoRefresh();
-            }
-        });
-
-        function startAutoRefresh() {
-            refreshInterval = setInterval(() => {
-                console.log('Refreshing data...');
-            }, 30000);
-        }
-
-        function stopAutoRefresh() {
-            if (refreshInterval) {
-                clearInterval(refreshInterval);
-            }
-        }
-
-        startAutoRefresh();
-
-        document.getElementById('locationSelector').addEventListener('change', function() {
-            console.log('Location changed to:', this.value);
-        });
-
-        document.getElementById('timeRange').addEventListener('change', function() {
-            console.log('Time range changed to:', this.value);
-        });
-
-        setInterval(() => {
-            const timestamp = new Date().toLocaleString('en-US', {
-                month: '2-digit',
-                day: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: true
-            });
-            
-            document.querySelectorAll('.text-xs.text-text-secondary').forEach(el => {
-                if (el.textContent.includes('Last updated:')) {
-                    el.textContent = `Last updated: ${timestamp}`;
-                }
-            });
-        }, 60000);
-
-    </script>
+    
     <script src="../../js/shared/menu.js"></script>
     <script src="../../js/admin/users.js"></script>
 
