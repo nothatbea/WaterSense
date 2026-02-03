@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    
 
     setInterval(updateLastUpdated, 60000);
 

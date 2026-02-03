@@ -125,5 +125,91 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('exportReport')?.addEventListener('click', () => {
         alert('Exporting report...');
     });
+    /* =============================
+   BATTERY VISUALIZATION
+============================= */
+
+// Convert raw ADC to battery %
+function adcToBatteryPercent(adc) {
+    const ADC_MAX = 4095;
+    const ADC_MIN = 2800;
+
+    if (adc === null || isNaN(adc)) return null;
+
+    let percent = ((adc - ADC_MIN) / (ADC_MAX - ADC_MIN)) * 100;
+    percent = Math.max(0, Math.min(100, percent));
+
+    return Math.round(percent);
+}
+
+// Update battery UI (desktop + mobile)
+function updateBatteryUI(locationId, rawADC) {
+    const bars = document.querySelectorAll(
+        `.battery-bar[data-location-id="${locationId}"]`
+    );
+    const texts = document.querySelectorAll(
+        `.battery-text[data-location-id="${locationId}"]`
+    );
+
+    if (!bars.length || !texts.length) return;
+
+    // NULL / invalid battery
+    if (rawADC === null) {
+        bars.forEach(bar => {
+            bar.style.width = "0%";
+            bar.className = "battery-bar h-2 rounded-full bg-secondary-300";
+        });
+        texts.forEach(text => {
+            text.textContent = "--%";
+            text.className = "battery-text text-xs font-medium text-text-secondary";
+        });
+        return;
+    }
+
+    const percent = adcToBatteryPercent(Number(rawADC));
+
+    bars.forEach(bar => {
+        bar.style.width = percent + "%";
+        bar.className = "battery-bar h-2 rounded-full";
+    });
+
+    texts.forEach(text => {
+        text.textContent = percent + "%";
+        text.className = "battery-text text-xs font-medium";
+    });
+
+    if (percent > 60) {
+        bars.forEach(bar => bar.classList.add("bg-success-500"));
+        texts.forEach(text => text.classList.add("text-success-600"));
+    } else if (percent > 30) {
+        bars.forEach(bar => bar.classList.add("bg-warning-500"));
+        texts.forEach(text => text.classList.add("text-warning-600"));
+    } else {
+        bars.forEach(bar => bar.classList.add("bg-error-500"));
+        texts.forEach(text => text.classList.add("text-error-600"));
+    }
+}
+
+    // Fetch latest battery values
+    async function loadLatestBattery() {
+        try {
+            const res = await fetch('/api/sensors/latest.php');
+            const data = await res.json();
+
+            data.forEach(row => {
+                updateBatteryUI(row.location_id, row.battery);
+            });
+
+        } catch (err) {
+            console.error("Battery fetch failed:", err);
+        }
+    }
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        loadLatestBattery();
+        setInterval(loadLatestBattery, 30000); // refresh every 30s
+    });
+
 
 });
