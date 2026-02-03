@@ -105,50 +105,7 @@
         </div>
     </nav>
 
-    <!-- Control Toolbar -->
-    <div class="bg-surface border-b border-border">
-        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-                <!-- Filters Section -->
-                <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-                    <!-- Status Filter -->
-                    <div class="flex items-center gap-2">
-                        <label class="text-sm font-medium text-text-secondary whitespace-nowrap">Status:</label>
-                        <select id="statusFilter" class="input py-2 px-3 min-h-[44px] cursor-pointer">
-                            <option value="all">All Status</option>
-                            <option value="online">Online</option>
-                            <option value="offline">Offline</option>
-                            <option value="maintenance">Maintenance</option>
-                        </select>
-                    </div>
-
-                    <!-- Search -->
-                    <div class="relative flex-1 min-w-[200px]">
-                        <input type="text" id="searchInput" placeholder="Search by Sensor ID..." class="input pl-10">
-                        <svg class="w-5 h-5 text-text-secondary absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex flex-wrap items-center gap-2">
-                    <button id="scheduleMaintenance" class="btn btn-outline flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                        <span class="hidden sm:inline">Schedule Maintenance</span>
-                    </button>
-                    <button id="exportReport" class="btn btn-primary flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        <span class="hidden sm:inline">Export Report</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+ 
 
     <!-- Main Content -->
     <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -191,7 +148,7 @@
                         </thead>
                         <tbody id="deviceTableBody">
                             <!-- Device Row - Lingga -->
-                            <tr class="border-b border-border hover:bg-secondary-50 cursor-pointer device-row" data-device-id="LM-LIN-001">
+                            <tr class="border-b border-border hover:bg-secondary-50 cursor-pointer device-row" data-device-id="1">
                                 <td class="py-4 px-2">
                                     <input type="checkbox" class="device-checkbox w-4 h-4 rounded border-border cursor-pointer">
                                 </td>
@@ -203,7 +160,7 @@
                                             </svg>
                                         </div>
                                         <div>
-                                            <p class="font-medium text-text-primary">LM-LIN-001</p>
+                                            <p class="font-medium text-text-primary">1</p>
                                             <p class="text-xs text-text-secondary">Water Level Sensor</p>
                                         </div>
                                     </div>
@@ -258,7 +215,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="font-semibold text-text-primary">LM-LIN-001</p>
+                                    <p class="font-semibold text-text-primary"> </p>
                                     <p class="text-xs text-text-secondary">Barangay Lingga</p>
                                 </div>
                             </div>
@@ -327,7 +284,7 @@
                     </span>
                 </div>
 
-                <span class="text-sm text-text-secondary">LM-LIN-001</span>
+                <span class="text-sm text-text-secondary"> </span>
             </div>
 
             <div class="space-y-4">
@@ -468,7 +425,7 @@
                     <!-- Map Marker -->
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                         <div class="relative">
-                            <div class="w-12 h-12 bg-success-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform" title="LM-LIN-001 - Barangay Lingga">
+                            <div class="w-12 h-12 bg-success-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform" title="  - Barangay Lingga">
                                 <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                                 </svg>
