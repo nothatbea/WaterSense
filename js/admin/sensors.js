@@ -191,25 +191,138 @@ function updateBatteryUI(locationId, rawADC) {
 }
 
     // Fetch latest battery values
+        // Fetch latest sensor values (battery + calibration-aware levels)
     async function loadLatestBattery() {
         try {
             const res = await fetch('/api/sensors/latest.php');
             const data = await res.json();
 
-            data.forEach(row => {
-                updateBatteryUI(row.location_id, row.battery);
+            data.forEach(sensor => {
+
+                // --- Battery (existing behavior) ---
+                updateBatteryUI(sensor.location_id, sensor.battery);
+
+                // --- Calibration UI (ADMIN ONLY, Lingga example) ---
+                if (sensor.location_id === 1) {
+
+                    // Raw & calibrated values
+                    document.getElementById("rawValue").textContent =
+                        sensor.raw_water_level;
+
+                    document.getElementById("calibratedValue").textContent =
+                        sensor.water_level + " cm";
+
+                    // Set current offset into controls
+                    if (offsetSlider && offsetInput) {
+                        offsetSlider.value = sensor.calibration_offset;
+                        offsetInput.value  = sensor.calibration_offset;
+                    }
+
+                    // Badge state
+                    updateCalibrationBadge(sensor.calibration_offset);
+                }
             });
 
         } catch (err) {
-            console.error("Battery fetch failed:", err);
+            console.error("Latest sensor fetch failed:", err);
         }
     }
 
-    // Run on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        loadLatestBattery();
-        setInterval(loadLatestBattery, 30000); // refresh every 30s
-    });
+
+        /* =============================
+       CALIBRATION UI HELPERS
+    ============================= */
+
+    // Show / hide "Calibration Active" badge based on offset
+    function updateCalibrationBadge(offset) {
+        const badge  = document.getElementById("calibrationBadge");
+        const status = document.getElementById("calibrationStatus");
+
+        if (!badge || !status) return;
+
+        if (Math.abs(offset) > 0.01) {
+            badge.classList.remove("hidden");
+            status.textContent = "Calibrated";
+            status.classList.remove("badge-secondary");
+            status.classList.add("badge-success");
+        } else {
+            badge.classList.add("hidden");
+            status.textContent = "Not Calibrated";
+            status.classList.remove("badge-success");
+            status.classList.add("badge-secondary");
+        }
+    }
+
+    // Preview calibrated value (visual only, no backend write)
+    function previewCalibration() {
+        const rawEl        = document.getElementById("rawValue");
+        const offsetEl     = document.getElementById("linggaOffset");
+        const calibratedEl = document.getElementById("calibratedValue");
+
+        if (!rawEl || !offsetEl || !calibratedEl) return;
+
+        const raw    = parseFloat(rawEl.textContent);
+        const offset = parseFloat(offsetEl.value);
+
+        if (isNaN(raw) || isNaN(offset)) return;
+
+        const preview = raw + offset;
+        calibratedEl.textContent = preview.toFixed(1) + " cm";
+
+        // Update badge during preview
+        updateCalibrationBadge(offset);
+    }
+
+        /* =============================
+       CALIBRATION UI INTERACTIONS
+    ============================= */
+
+    const offsetSlider = document.getElementById("linggaOffset");
+    const offsetInput  = document.getElementById("linggaOffsetInput");
+    const setRefBtn    = document.getElementById("setReferenceBtn");
+
+    // Sync slider → number input
+    if (offsetSlider && offsetInput) {
+        offsetSlider.addEventListener("input", () => {
+            offsetInput.value = offsetSlider.value;
+            previewCalibration();
+        });
+
+        offsetInput.addEventListener("input", () => {
+            offsetSlider.value = offsetInput.value;
+            previewCalibration();
+        });
+    }
+
+    // Compute suggested offset from manual reference
+    if (setRefBtn) {
+        setRefBtn.addEventListener("click", () => {
+            const raw = parseFloat(
+                document.getElementById("rawValue")?.textContent
+            );
+            const ref = parseFloat(
+                document.getElementById("linggaReference")?.value
+            );
+
+            if (isNaN(raw) || isNaN(ref)) {
+                alert("Please enter a valid reference level.");
+                return;
+            }
+
+            const suggestedOffset = ref - raw;
+
+            offsetSlider.value = suggestedOffset.toFixed(1);
+            offsetInput.value  = suggestedOffset.toFixed(1);
+
+            previewCalibration();
+        });
+    }
+
+
+
+     // Initial load + refresh
+    loadLatestBattery();
+    setInterval(loadLatestBattery, 30000);
 
 
 });

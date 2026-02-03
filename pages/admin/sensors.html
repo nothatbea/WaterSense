@@ -312,93 +312,138 @@
                     </div>
 
                     <!-- Barangay Lingga Calibration -->
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <h4 class="font-semibold text-text-primary">Barangay Lingga</h4>
-                            <span class="text-sm text-text-secondary">LM-LIN-001</span>
-                        </div>
-                        
-                        <div class="space-y-4">
-                            <!-- Current Reading -->
-                            <div class="bg-secondary-50 rounded-md p-4">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-medium text-text-secondary">Current Reading</span>
-                                    <span class="text-2xl font-bold text-primary-600">93 cm</span>
-                                </div>
-                                <div class="text-xs text-text-secondary">Raw sensor value: 93.2 cm</div>
-                            </div>
+        <div>
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <h4 class="font-semibold text-text-primary">Barangay Lingga</h4>
 
-                            <!-- Calibration Offset -->
-                            <div>
-                                <label class="block text-sm font-medium text-text-primary mb-2">
-                                    Calibration Offset (cm)
-                                </label>
-                                <div class="flex items-center gap-3">
-                                    <input type="range" id="linggaOffset" min="-10" max="10" value="0" class="flex-1" step="0.1">
-                                    <div class="w-24">
-                                        <input type="number" id="linggaOffsetInput" value="0" min="-10" max="10" step="0.1" class="input text-center py-2">
-                                    </div>
-                                </div>
-                                <div class="flex justify-between text-xs text-text-secondary mt-1">
-                                    <span>-10 cm</span>
-                                    <span>0 cm (no offset)</span>
-                                    <span>+10 cm</span>
-                                </div>
-                            </div>
-                            
-                            <!-- Reference Point Calibration -->
-                            <div>
-                                <label class="block text-sm font-medium text-text-primary mb-2">
-                                    Known Reference Level (cm)
-                                </label>
-                                <p class="text-xs text-text-secondary mb-2">Enter the actual water level measured manually</p>
-                                <div class="flex items-center gap-3">
-                                    <input type="number" id="linggaReference" value="93" min="0" max="200" step="0.1" class="input flex-1 py-2">
-                                    <button id="setReferenceBtn" class="btn btn-outline py-2 px-3">
-                                        Set Reference
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Calibration Active Badge (admin only) -->
+                    <span
+                        id="calibrationBadge"
+                        class="hidden px-2 py-0.5 rounded-full text-xs font-medium
+                            bg-warning-100 text-warning-700">
+                        Calibration Active
+                    </span>
+                </div>
+
+                <span class="text-sm text-text-secondary">LM-LIN-001</span>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Current Reading -->
+                <div class="bg-secondary-50 rounded-md p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-text-secondary">
+                            Current Reading
+                        </span>
+
+                        <!-- CALIBRATED VALUE -->
+                        <span
+                            id="calibratedValue"
+                            class="text-2xl font-bold text-primary-600">
+                            -- cm
+                        </span>
                     </div>
 
-                    <!-- Calibration Info -->
-                    <div class="mt-6 pt-6 border-t border-border">
-                        <h5 class="text-sm font-medium text-text-primary mb-2">Calibration Info</h5>
-                        <div class="space-y-2 text-sm text-text-secondary">
-                            <div class="flex items-center justify-between">
-                                <span>Last Calibrated:</span>
-                                <span class="font-medium text-text-primary">12/08/2025 02:15 PM</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span>Calibrated By:</span>
-                                <span class="font-medium text-text-primary">Admin User</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span>Status:</span>
-                                <span class="badge badge-success">Calibrated</span>
-                            </div>
-                        </div>
+                    <!-- RAW VALUE -->
+                    <div class="text-xs text-text-secondary">
+                        Raw sensor value:
+                        <span id="rawValue">--</span> cm
                     </div>
                 </div>
 
-                <!-- Calibration History -->
-                <div class="card card-compact">
-                    <h4 class="font-semibold text-text-primary mb-3">Recent Calibration</h4>
-                    <div class="space-y-3">
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 bg-success-100 rounded flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5 text-success-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm font-medium text-text-primary">LM-LIN-001</p>
-                                <p class="text-xs text-text-secondary">Calibrated successfully</p>
-                                <p class="text-xs text-text-secondary mt-1">12/08/2025 02:15 PM</p>
-                            </div>
+                <!-- Calibration Offset -->
+                <div>
+                    <label class="block text-sm font-medium text-text-primary mb-2">
+                        Calibration Offset (cm)
+                    </label>
+
+                    <div class="flex items-center gap-3">
+                        <input
+                            type="range"
+                            id="linggaOffset"
+                            min="-10"
+                            max="10"
+                            value="0"
+                            step="0.1"
+                            class="flex-1">
+
+                        <div class="w-24">
+                            <input
+                                type="number"
+                                id="linggaOffsetInput"
+                                value="0"
+                                min="-10"
+                                max="10"
+                                step="0.1"
+                                class="input text-center py-2">
                         </div>
                     </div>
+
+                    <div class="flex justify-between text-xs text-text-secondary mt-1">
+                        <span>-10 cm</span>
+                        <span>0 cm (no offset)</span>
+                        <span>+10 cm</span>
+                    </div>
+
+                    <p class="text-xs text-text-secondary mt-2">
+                        Adjusts readings to match manual measurements without modifying raw data.
+                    </p>
+                </div>
+
+                <!-- Reference Point Calibration (optional helper) -->
+                <div>
+                    <label class="block text-sm font-medium text-text-primary mb-2">
+                        Known Reference Level (cm)
+                    </label>
+                    <p class="text-xs text-text-secondary mb-2">
+                        Enter the actual water level measured manually
+                    </p>
+
+                    <div class="flex items-center gap-3">
+                        <input
+                            type="number"
+                            id="linggaReference"
+                            value=""
+                            min="0"
+                            max="200"
+                            step="0.1"
+                            class="input flex-1 py-2">
+
+                        <button
+                            id="setReferenceBtn"
+                            class="btn btn-outline py-2 px-3">
+                            Set Reference
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calibration Info -->
+        <div class="mt-6 pt-6 border-t border-border">
+            <h5 class="text-sm font-medium text-text-primary mb-2">
+                Calibration Info
+            </h5>
+
+            <div class="space-y-2 text-sm text-text-secondary">
+                <div class="flex items-center justify-between">
+                    <span>Last Calibrated:</span>
+                    <span
+                        id="lastCalibratedAt"
+                        class="font-medium text-text-primary">
+                        —
+                    </span>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <span>Status:</span>
+                    <span
+                        id="calibrationStatus"
+                        class="badge badge-secondary">
+                        Not Calibrated
+                    </span>
                 </div>
             </div>
         </div>
