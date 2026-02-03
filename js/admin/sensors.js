@@ -36,17 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const deviceDetailContent = document.getElementById('deviceDetailContent');
 
     const deviceData = {
-        "LM-PAL-001": {
-            name: "LM-PAL-001",
-            location: "Barangay Palingon",
-            status: "Online",
-            battery: "87%",
-            signal: "Excellent",
-            installed: "03/15/2024",
-            lastCalibration: "12/10/2025",
-            uptime: "99.8%",
-            dataPoints: "1,440"
-        },
         "LM-LIN-001": {
             name: "LM-LIN-001",
             location: "Barangay Lingga",
