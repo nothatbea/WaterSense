@@ -305,7 +305,7 @@ function updateBatteryUI(locationId, rawADC) {
             );
 
             if (isNaN(raw) || isNaN(ref)) {
-                alert("Please enter a valid reference level.");
+                alert("Please enter a valid reference level. ");
                 return;
             }
 
