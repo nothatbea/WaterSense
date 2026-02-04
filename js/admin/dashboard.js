@@ -39,17 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startAutoRefresh();
 
-    /* =============================
-       TIME RANGE CHANGE
-    ============================= */
+    //  TIME RANGE CHANGE */
     timeRangeSelect?.addEventListener('change', function () {
         console.log('Time range changed to:', this.value);
         updateLastUpdated();
     });
 
-    /* =============================
-       LAST UPDATED TIMESTAMP
-    ============================= */
+    /* LAST UPDATED TIMESTAMP  */
     function updateLastUpdated() {
         const timestamp = new Date().toLocaleString('en-US', {
             month: '2-digit',
