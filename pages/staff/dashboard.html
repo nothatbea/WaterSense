@@ -46,7 +46,7 @@
                     <div class="hidden md:flex items-center gap-6">
                         <a href="dashboard.html" class="text-primary font-medium border-b-2 border-primary pb-1">Dashboard</a>
                         <a href="reports.html" class="text-text-secondary hover:text-primary transition-colors">Reports</a>
-                        <a href="analytics.html" class="text-text-secondary hover:text-primary transition-colors">Analytics</a>
+
                     </div>
                 </div>
 
@@ -68,10 +68,7 @@
                             Reports
                         </a>
 
-                        <a href="analytics.html"
-                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition">
-                            Analytics
-                        </a>
+
                     </div>
                 </div>
 
@@ -135,79 +132,72 @@
                 </div>
             </div>
             
-            <!-- Last Update Timestamp -->
-            <div class="mt-3 flex items-center gap-2 text-xs text-text-secondary">
-                <span class="status-indicator status-normal status-pulse"></span>
-                <span>Last updated: <span id="lastUpdate">12/13/2025 12:32 AM</span></span>
-                <span class="mx-2">•</span>
-                <span>Next refresh in: <span id="nextRefresh">4:58</span></span>
+             <div class="flex items-center gap-4">
+                    <!-- Current Time -->
+                    <div class="text-right hidden sm:block">
+                        <p class="text-xs text-text-secondary">Last Updated</p>
+                        <p class="text-sm font-medium text-text-primary" id="lastUpdate">12/13/2025 12:32 AM</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+   
 
     <!-- Main Content -->
     <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <!-- KPI Strip - Current Water Level -->
-        <div class="grid grid-cols-1 gap-6 mb-6">
-            <!-- Barangay Lingga Current Status -->
-            <div class="card card-comfortable">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h3 class="text-lg font-semibold text-text-primary">Barangay Lingga</h3>
-                        <p class="text-sm text-text-secondary">Current Water Level</p>
-                    </div>
-                    <span class="badge badge-warning">Caution</span>
-                </div>
+        
 
-                <!-- Horizontal Gauge Chart -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between text-sm mb-2">
-                        <span class="text-text-secondary">0 cm</span>
-                        <span class="font-data text-2xl font-semibold text-warning-600">93 cm</span>
-                        <span class="text-text-secondary">150 cm</span>
+        <!-- Main Water Level Indicator -->
+        <div class="card card-comfortable">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-semibold text-text-primary mb-2">Current Water Level</h2>
+                <p class="text-sm text-text-secondary" id="locationName">Barangay Lingga</p>
+            </div>
+
+            <!-- Water Level Visualization -->
+            <div class="relative bg-secondary-50 rounded-md p-4 sm:p-8 mb-6">
+                <div class="flex items-end justify-center h-64 sm:h-80">
+                    <!-- Scale Labels -->
+                    <div class="absolute left-4 sm:left-6 top-0 bottom-0 flex flex-col justify-between text-sm text-text-secondary font-data">
+                        <span>180cm</span>
+                        <span>150cm</span>
+                        <span>120cm</span>
+                        <span>90cm</span>
+                        <span>60cm</span>
+                        <span>30cm</span>
+                        <span>0cm</span>
                     </div>
-                    <div class="relative w-full h-8 bg-secondary-100 rounded-md overflow-hidden">
-                        <!-- Critical Zone (120-150cm) -->
-                        <div class="absolute right-0 top-0 bottom-0 bg-error-100" style="width: 20%;"></div>
-                        <!-- Warning Zone (90-120cm) -->
-                        <div class="absolute top-0 bottom-0 bg-warning-100" style="left: 60%; width: 20%;"></div>
-                        <!-- Normal Zone (0-90cm) -->
-                        <div class="absolute left-0 top-0 bottom-0 bg-success-100" style="width: 60%;"></div>
-                        <!-- Current Level Indicator -->
-                        <div class="absolute top-0 bottom-0 w-1 bg-warning-600 shadow-md transition-all duration-500" style="left: 62%;">
-                            <div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-warning-600 rounded-full border-2 border-white"></div>
+                    
+                    <!-- Water Level Bar -->
+                    <div class="relative w-24 sm:w-32 h-full bg-secondary-200 rounded-md overflow-hidden">
+                        <div id="waterFill" class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-warning-500 to-warning-400 animate-water-rise transition-all duration-1000" style="height: 0%;">
+                            <div class="absolute inset-0 bg-white opacity-20 animate-pulse"></div>
+                        </div>
+                        <!-- Threshold Lines -->
+                        <div class="absolute left-0 right-0 border-t-2 border-warning-500 border-dashed" style="top: 40%;">
+                            <span class="absolute -right-14 sm:-right-16 -top-3 text-xs text-warning-700 font-medium"> </span>
+                        </div>
+                        <div class="absolute left-0 right-0 border-t-2 border-error-500 border-dashed" style="top: 20%;">
+                            <span class="absolute -right-16 sm:-right-20 -top-3 text-xs text-error-700 font-medium">Warning</span>
                         </div>
                     </div>
-                    <div class="flex justify-between text-xs text-text-secondary mt-1">
-                        <span>Normal</span>
-                        <span>Warning (90cm)</span>
-                        <span>Critical (120cm)</span>
-                    </div>
-                </div>
 
-                <!-- Status Metrics -->
-                <div class="grid grid-cols-3 gap-3">
-                    <div class="text-center">
-                        <p class="text-xs text-text-secondary mb-1">Percentage</p>
-                        <p class="text-lg font-semibold text-text-primary">62.0%</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-xs text-text-secondary mb-1">24h Change</p>
-                        <p class="text-lg font-semibold text-warning-600">+5 cm</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-xs text-text-secondary mb-1">Trend</p>
-                        <div class="flex items-center justify-center gap-1">
-                            <svg class="w-5 h-5 text-warning-600 transform rotate-180" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M7 14l5-5 5 5z"/>
-                            </svg>
-                            <span class="text-sm font-medium text-warning-600">Rising</span>
+                    <!-- Status Indicator -->
+                    <div class="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2">
+                        <div id="statusIndicator" class="flex flex-col items-center gap-2">
+                            <div class="status-indicator status-caution status-pulse w-6 h-6"></div>
+                            <span id="statusText">--</span>
+                            <span class="text-xs font-medium text-warning-700 uppercase tracking-wide">caution</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
+            <div class="text-center">
+                    <p id="waterLevelText" class="data-value text-warning-600">0 cm</p>
+                    <p class="data-label mt-1">Current Water Level</p>
+                    <p class="text-xs text-text-secondary mt-2">Last updated: <span id="lastUpdate">12/13/2025 12:28 AM</span></p>
+                </div>
+            </div>
         <!-- Main Visualization and Alert Panel -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
             <!-- Trend Analysis Chart (8 cols) -->
@@ -535,6 +525,8 @@
 
     <!-- Dashboard logic -->
     <script src="../js/staff/dashboard.js"></script>
+    
+    <script defer src="../../js/public/water-level.js"></script>
 
     <!-- External injector -->
     <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
