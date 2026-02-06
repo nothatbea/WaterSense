@@ -83,9 +83,7 @@
 
                     </div>
                     
-                    <img src="https://l1nq.com/Pznvy" alt="LGU staff member profile picture" 
-                        class="w-10 h-10 rounded-full border-2 border-primary" 
-                        onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                  
                     
                     <button id="logoutBtn" class="btn btn-outline py-2 px-3 text-sm min-h-[44px] mr-2 sm:mr-0" 
                             onclick="window.location.href='../auth/login.html'">
@@ -113,26 +111,7 @@
                 </div>
 
                 <!-- Time Range and Actions -->
-                <div class="flex flex-wrap items-center gap-3">
-                    <div class="flex items-center gap-2 bg-secondary-50 rounded-md p-1">
-                        <button class="time-range-btn active px-4 py-2 rounded-sm text-sm font-medium transition-all" data-range="today">Today</button>
-                        <button class="time-range-btn px-4 py-2 rounded-sm text-sm font-medium transition-all" data-range="week">Week</button>
-                        <button class="time-range-btn px-4 py-2 rounded-sm text-sm font-medium transition-all" data-range="month">Month</button>
-                    </div>
-                    
-                    <button id="generateReport" class="btn btn-primary flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        <span class="hidden sm:inline">Generate Report</span>
-                    </button>
-
-                    <button id="refreshData" class="btn btn-outline flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                        </svg>
-                    </button>
-                </div>
+                
             </div>
             
             <!-- Last Update Timestamp -->
@@ -145,68 +124,7 @@
         </div>
     </div>
 
-    <!-- Main Content -->
-    <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <!-- KPI Strip - Current Water Level -->
-        <div class="grid grid-cols-1 gap-6 mb-6">
-            <!-- Barangay Lingga Current Status -->
-            <div class="card card-comfortable">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h3 class="text-lg font-semibold text-text-primary">Barangay Lingga</h3>
-                        <p class="text-sm text-text-secondary">Current Water Level</p>
-                    </div>
-                    <span class="badge badge-warning">Caution</span>
-                </div>
 
-                <!-- Horizontal Gauge Chart -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between text-sm mb-2">
-                        <span class="text-text-secondary">0 cm</span>
-                        <span class="font-data text-2xl font-semibold text-warning-600">93 cm</span>
-                        <span class="text-text-secondary">150 cm</span>
-                    </div>
-                    <div class="relative w-full h-8 bg-secondary-100 rounded-md overflow-hidden">
-                        <!-- Critical Zone (120-150cm) -->
-                        <div class="absolute right-0 top-0 bottom-0 bg-error-100" style="width: 20%;"></div>
-                        <!-- Warning Zone (90-120cm) -->
-                        <div class="absolute top-0 bottom-0 bg-warning-100" style="left: 60%; width: 20%;"></div>
-                        <!-- Normal Zone (0-90cm) -->
-                        <div class="absolute left-0 top-0 bottom-0 bg-success-100" style="width: 60%;"></div>
-                        <!-- Current Level Indicator -->
-                        <div class="absolute top-0 bottom-0 w-1 bg-warning-600 shadow-md transition-all duration-500" style="left: 62%;">
-                            <div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-warning-600 rounded-full border-2 border-white"></div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between text-xs text-text-secondary mt-1">
-                        <span>Normal</span>
-                        <span>Warning (90cm)</span>
-                        <span>Critical (120cm)</span>
-                    </div>
-                </div>
-
-                <!-- Status Metrics -->
-                <div class="grid grid-cols-3 gap-3">
-                    <div class="text-center">
-                        <p class="text-xs text-text-secondary mb-1">Percentage</p>
-                        <p class="text-lg font-semibold text-text-primary">62.0%</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-xs text-text-secondary mb-1">24h Change</p>
-                        <p class="text-lg font-semibold text-warning-600">+5 cm</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-xs text-text-secondary mb-1">Trend</p>
-                        <div class="flex items-center justify-center gap-1">
-                            <svg class="w-5 h-5 text-warning-600 transform rotate-180" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M7 14l5-5 5 5z"/>
-                            </svg>
-                            <span class="text-sm font-medium text-warning-600">Rising</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Main Visualization and Alert Panel -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
