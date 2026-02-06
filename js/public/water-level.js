@@ -1,46 +1,42 @@
 const API_URL = "https://watersense-backend.onrender.com/api/sensors/latest";
 
+// ===== DOM LOOKUPS (GLOBAL) =====
+const waterLevelText = document.getElementById("waterLevelText");
+const waterFill = document.getElementById("waterFill");
+const statusBadge = document.getElementById("statusBadge");
+const lastUpdate = document.getElementById("lastUpdate");
+const statusText = document.getElementById("statusText");
+
+// ===== SHARED UI UPDATER =====
+function updateUI({ water_level, status, created_at }) {
+  let level = parseFloat(water_level);
+  if (isNaN(level)) level = 0;
+
+  const maxHeight = 180; // cm
+  const percent = Math.min(Math.max((level / maxHeight) * 100, 0), 100);
+
+  waterLevelText.textContent = `${level.toFixed(1)} cm`;
+  waterFill.style.height = `${percent}%`;
+
+  statusText.textContent = status.toLowerCase();
+  lastUpdate.textContent = created_at;
+}
+
+// ===== FETCH (POLLING FALLBACK) =====
 async function fetchLatestWaterLevel() {
-
-  // ===== DOM LOOKUPS =====
-  const waterLevelText = document.getElementById("waterLevelText");
-  const waterFill = document.getElementById("waterFill");
-  const statusBadge = document.getElementById("statusBadge");
-  const lastUpdate = document.getElementById("lastUpdate");
-  const statusText = document.getElementById("statusText");
-
-  // ===== SAFETY GUARD =====
   if (!waterLevelText || !waterFill || !statusBadge || !lastUpdate || !statusText) {
     console.warn("Water-level elements missing in DOM. Skipping update.");
     return;
   }
 
   try {
-    // ===== FETCH DATA =====
     const res = await fetch(API_URL);
     if (!res.ok) throw new Error("API not reachable");
 
     const data = await res.json();
     if (!Array.isArray(data) || data.length === 0) return;
 
-    const row = data[0];
-
-    // ===== PARSE LEVEL =====
-    let level = parseFloat(row.water_level);
-    if (isNaN(level)) level = 0;
-
-    const maxHeight = 180; // cm
-    const percent = Math.min(Math.max((level / maxHeight) * 100, 0), 100);
-
-    // ===== UPDATE UI =====
-    waterLevelText.textContent = `${level.toFixed(1)} cm`;
-    waterFill.style.height = `${percent}%`;
-
-    statusBadge.textContent = "none";
-    statusText.textContent = row.status.toLowerCase();
-
-    lastUpdate.textContent = row.created_at;
-
+    updateUI(data[0]);
   } catch (err) {
     console.error("Failed to fetch water level:", err.message);
   }
@@ -49,5 +45,21 @@ async function fetchLatestWaterLevel() {
 // ===== INITIAL LOAD =====
 fetchLatestWaterLevel();
 
-// ===== AUTO REFRESH =====
+// ===== AUTO REFRESH (SAFETY NET) =====
 setInterval(fetchLatestWaterLevel, 30000);
+
+// ===== REALTIME UPDATE (WebSocket) =====
+const ws = new WebSocket("wss://watersense-backend.onrender.com");
+
+ws.onmessage = (e) => {
+  const data = JSON.parse(e.data);
+
+  // Ignore handshake / non-sensor messages
+  if (!data.water_level_cm) return;
+
+  updateUI({
+    water_level: data.water_level_cm,
+    status: data.status,
+    created_at: data.received_at
+  });
+};
