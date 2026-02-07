@@ -2,7 +2,7 @@
  * CONFIG
  *************************************************/
 const ANALYTICS_API =
-  "https://steelblue-skunk-833121.hostingersite.com/api/analytics/water_level_trend.php"; // Hostinger API endpoint
+  "https://steelblue-skunk-833121.hostingersite.com/api/analytics/water_trend.php"; // Hostinger API endpoint
 
 const AUTO_REFRESH_SECONDS = 300; // 5 minutes
 let refreshCountdown = AUTO_REFRESH_SECONDS;
