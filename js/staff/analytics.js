@@ -3,6 +3,8 @@
  *************************************************/
 const ANALYTICS_API =
   "https://steelblue-skunk-833121.hostingersite.com/api/analytics/water_trend.php"; // Hostinger API endpoint
+const ALERT_ANALYTICS_API =
+  "https://steelblue-skunk-833121.hostingersite.com/api/analytics/alert_analytics.php";
 
 const AUTO_REFRESH_SECONDS = 300; // 5 minutes
 let refreshCountdown = AUTO_REFRESH_SECONDS;
@@ -16,6 +18,16 @@ const nextRefreshEl = document.getElementById("nextRefresh");
 const svg = document.querySelector("svg");
 const trendLine = svg?.querySelector("polyline"); // main trend line
 const dataPoint = svg?.querySelector("circle");   // latest data point
+
+// Alert Summary counts
+const criticalCountEl = document.querySelector("[data-alert='EMERGENCY']");
+const dangerCountEl  = document.querySelector("[data-alert='DANGER']");
+const warningCountEl = document.querySelector("[data-alert='WARNING']");
+const cautionCountEl = document.querySelector("[data-alert='CAUTION']");
+
+// Recent Alerts container
+const recentAlertsEl = document.getElementById("recentAlerts");
+
 
 /*************************************************
  * TIME RANGE BUTTONS (UI ONLY – backend-ready)
@@ -151,9 +163,53 @@ function renderTrend(timestamps, values) {
   }
 }
 
+async function fetchAlertAnalytics() {
+  try {
+    const res = await fetch(ALERT_ANALYTICS_API);
+    const data = await res.json();
+
+    // ----- SUMMARY -----
+    if (criticalCountEl) criticalCountEl.textContent = data.summary.EMERGENCY ?? 0;
+    if (dangerCountEl)  dangerCountEl.textContent  = data.summary.DANGER ?? 0;
+    if (warningCountEl) warningCountEl.textContent = data.summary.WARNING ?? 0;
+    if (cautionCountEl) cautionCountEl.textContent = data.summary.CAUTION ?? 0;
+
+    // ----- RECENT ALERTS -----
+    if (recentAlertsEl) {
+      recentAlertsEl.innerHTML = "";
+
+      data.recent.forEach(alert => {
+        const item = document.createElement("div");
+        item.className = "flex items-start gap-2 p-2 rounded-md";
+
+        item.innerHTML = `
+          <div class="flex-1">
+            <p class="text-sm font-medium text-text-primary">
+              ${alert.status} – ${alert.water_level} cm
+            </p>
+            <p class="text-xs text-text-secondary mt-1">
+              ${new Date(alert.sent_at).toLocaleString()}
+            </p>
+          </div>
+        `;
+
+        recentAlertsEl.appendChild(item);
+      });
+    }
+
+  } catch (err) {
+    console.error("Alert analytics fetch failed:", err);
+  }
+}
+
+
 
 /*************************************************
  * INIT
  *************************************************/
 updateTimestamp();
 fetchAnalytics();
+updateTimestamp();
+fetchAnalytics();
+fetchAlertAnalytics();
+
