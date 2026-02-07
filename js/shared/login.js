@@ -52,9 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             setTimeout(() => {
                 if (result.role === "admin") {
-                    window.location.href = "/WaterSense_v3/pages/admin/dashboard.html";
+                    window.location.href = "/pages/admin/dashboard.html";
                 } else {
-                    window.location.href = "/WaterSense_v3/pages/staff/dashboard.html";
+                    window.location.href = "/pages/staff/dashboard.html";
                 }
             }, 800);
 
