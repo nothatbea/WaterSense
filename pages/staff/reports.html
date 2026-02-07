@@ -3,22 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LGU Staff Dashboard - WaterSense Reports</title>
+    <title>LGU Reports - WaterSense</title>
 
     <!-- Global CSS -->
     <link rel="stylesheet" href="../../css/main.css">
-
-    <!-- Reports Page CSS -->
     <link rel="stylesheet" href="../../css/reports.css">
-
-    <!-- External modules (unchanged) -->
-    <script type="module" async src="https://l1nq.com/rvNGG"></script>
-    <script type="module" defer src="https://sl1nk.com/REegY"></script>
 </head>
 
 <body class="bg-background min-h-screen">
-    <!-- Top Navigation Bar -->
-    <nav class="bg-surface border-b border-border shadow-sm sticky top-0 z-50">
+
+<!-- ================= NAVBAR ================= -->
+<nav class="bg-surface border-b border-border shadow-sm sticky top-0 z-50">
         <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
 
@@ -49,7 +44,7 @@
                     <div class="hidden md:flex items-center gap-6">
                         <a href="dashboard.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
                         <a href="reports.html" class="text-primary font-medium border-b-2 border-primary pb-1">Reports</a>
-                        <a href="analytics.html" class="text-primary font-medium border-b-2 border-primary pb-1">Analytics</a>
+                        <a href="analytics.html" class="text-text-secondary hover:text-primary transition-colors">Analytics</a>
                     </div>
                 </div>
 
@@ -61,7 +56,7 @@
                     </div>
 
                     <div class="px-4 py-4 space-y-2">
-                        <a href="dashboard.html""
+                        <a href="dashboard.html"
                         class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition">
                             Dashboard
                         </a>
@@ -79,14 +74,6 @@
                        
                     </div>
                 </div>
-
-
-
-                <!-- User Profile -->
-                <div class="flex items-center gap-3 mr-2 sm:mr-0">
-                    <div class="hidden sm:block text-right">
-
-                    </div>
                     
                     
                     <button id="logoutBtn" class="btn btn-outline py-2 px-3 text-sm min-h-[44px] mr-2 sm:mr-0" 
@@ -102,350 +89,116 @@
         </div>
     </nav>
 
-    <!-- Control Bar -->
-    <div class="bg-surface border-b border-border">
-        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <!-- Location Selector -->
-                <div class="flex items-center gap-3">
-                    <label class="text-sm font-medium text-text-secondary">Location:</label>
-                    <select id="locationSelector" class="input py-2 px-3 min-h-[44px] cursor-pointer">
-                        <option value="all" selected>All Locations</option>
-                        <option value="palingon">Barangay Palingon</option>
-                        <option value="lingga">Barangay Lingga</option>
-                    </select>
-                </div>
+<!-- ================= HEADER ================= -->
+<div class="bg-surface border-b border-border">
+    <div class="max-w-[1920px] mx-auto px-4 py-4">
+        <h2 class="text-xl font-bold text-text-primary">Reports</h2>
+        <p class="text-sm text-text-secondary">
+            Generate official water level and alert reports for Barangay Lingga
+        </p>
 
-                <!-- Time Range and Actions -->
-                <div class="flex flex-wrap items-center gap-3">
-                    <div class="flex items-center gap-1 bg-secondary-50 rounded-md p-1">
-                        <button class="time-range-btn active px-3 py-2 rounded-sm text-xs sm:text-sm font-medium transition-all min-h-[44px]" data-range="today">Today</button>
-                        <button class="time-range-btn px-3 py-2 rounded-sm text-xs sm:text-sm font-medium transition-all min-h-[44px]" data-range="week">Week</button>
-                        <button class="time-range-btn px-3 py-2 rounded-sm text-xs sm:text-sm font-medium transition-all min-h-[44px]" data-range="month">Month</button>
-                    </div>
-                    
-                    <button id="refreshData" class="btn btn-outline flex items-center gap-2 min-h-[44px]">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                        </svg>
-                        <span class="hidden sm:inline">Refresh</span>
-                    </button>
+        <div class="mt-2 text-xs text-text-secondary">
+            Location: <strong>Barangay Lingga</strong>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MAIN ================= -->
+<main class="max-w-[1920px] mx-auto px-4 py-6">
+
+    <!-- ===== REPORT GENERATOR ===== -->
+    <div class="card card-comfortable mb-6">
+        <h3 class="text-lg font-semibold text-text-primary mb-4">
+            Generate Report
+        </h3>
+
+        <!-- Report Type -->
+        <div class="report-type-selection">
+
+            <div class="report-type-card active" data-type="daily">
+                <h4 class="font-medium text-text-primary">Daily Report</h4>
+                <p class="text-xs text-text-secondary">
+                    24-hour water level & alert summary
+                </p>
+            </div>
+
+            <div class="report-type-card" data-type="weekly">
+                <h4 class="font-medium text-text-primary">Weekly Report</h4>
+                <p class="text-xs text-text-secondary">
+                    7-day trend and alert analysis
+                </p>
+            </div>
+
+            <div class="report-type-card" data-type="custom">
+                <h4 class="font-medium text-text-primary">Custom Report</h4>
+                <p class="text-xs text-text-secondary">
+                    Select a specific date range
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Custom Date Range -->
+        <div id="customReportForm" class="custom-report-form">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                <div>
+                    <label class="text-sm text-text-secondary">Start Date</label>
+                    <input type="date" id="startDate" class="input w-full">
+                </div>
+                <div>
+                    <label class="text-sm text-text-secondary">End Date</label>
+                    <input type="date" id="endDate" class="input w-full">
                 </div>
             </div>
-            
-            <!-- Last Update Timestamp -->
-            <div class="mt-3 flex items-center gap-2 text-xs text-text-secondary">
-                <span class="status-indicator status-normal status-pulse"></span>
-                <span>Last updated: <span id="lastUpdate">12/13/2025 12:32 AM</span></span>
-                <span class="mx-2 hidden sm:inline">•</span>
-                <span class="hidden sm:inline">Next refresh in: <span id="nextRefresh">4:58</span></span>
+        </div>
+
+        <!-- Format -->
+        <div class="mt-4">
+            <label class="text-sm text-text-secondary">Format</label>
+            <div class="flex gap-2 mt-2">
+                <button class="format-btn active" data-format="pdf">PDF</button>
             </div>
+        </div>
+
+        <!-- Generate -->
+        <div class="mt-6">
+            <button id="generateReport"
+                    class="btn btn-primary w-full min-h-[44px]">
+                Generate PDF Report
+            </button>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <!-- Page Header -->
-        <div class="mb-6">
-            <h1 class="text-xl sm:text-2xl font-bold text-text-primary mb-2">Reports</h1>
-            <p class="text-sm sm:text-base text-text-secondary">Download and view system reports</p>
-        </div>
+    <!-- ===== INFO CARD ===== -->
+    <div class="card card-comfortable">
+        <h4 class="font-semibold text-text-primary mb-2">
+            Included in Reports
+        </h4>
 
-        <!-- Generate New Report Section -->
-        <div class="card card-comfortable mb-6">
-            <h2 class="text-lg font-semibold text-text-primary mb-4">Generate New Report</h2>
-            
-            <div class="report-type-selection">
-                <!-- Daily Report -->
-                <div class="report-type-card" data-type="daily">
-                    <div class="report-type-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-medium text-text-primary mb-1 text-sm sm:text-base">Daily Report</h3>
-                    <p class="text-xs sm:text-sm text-text-secondary">24-hour water level summary</p>
-                </div>
+        <ul class="list-disc ml-5 text-sm text-text-secondary space-y-1">
+            <li>Water level readings (cm)</li>
+            <li>Date & time of measurements</li>
+            <li>Status classification (Normal, Caution, Warning, Danger)</li>
+            <li>Alert history and SMS notifications</li>
+            <li>Sensor battery status</li>
+        </ul>
 
-                <!-- Weekly Summary -->
-                <div class="report-type-card" data-type="weekly">
-                    <div class="report-type-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-medium text-text-primary mb-1 text-sm sm:text-base">Weekly Summary</h3>
-                    <p class="text-xs sm:text-sm text-text-secondary">7-day trend analysis</p>
-                </div>
+        <p class="text-xs text-text-secondary mt-4">
+            Reports are generated on demand and downloaded as PDF files.
+        </p>
+    </div>
 
-                <!-- Custom Report -->
-                <div class="report-type-card" data-type="custom">
-                    <div class="report-type-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-medium text-text-primary mb-1 text-sm sm:text-base">Custom Report</h3>
-                    <p class="text-xs sm:text-sm text-text-secondary">Custom date range and parameters</p>
-                </div>
-            </div>
+</main>
 
-            <!-- Custom Report Form (Initially Hidden) -->
-            <div id="customReportForm" class="custom-report-form">
-                <h3 class="font-medium text-text-primary mb-4 text-base sm:text-lg">Custom Report Parameters</h3>
-                
-                <div class="date-range-selector">
-                    <div>
-                        <label class="block text-sm font-medium text-text-secondary mb-1">Start Date</label>
-                        <input type="date" class="input w-full min-h-[44px]" id="startDate" value="2025-11-01">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-text-secondary mb-1">End Date</label>
-                        <input type="date" class="input w-full min-h-[44px]" id="endDate" value="2025-11-30">
-                    </div>
-                </div>
+<!-- ================= FOOTER ================= -->
+<footer class="bg-surface border-t border-border mt-12">
+    <div class="max-w-[1920px] mx-auto px-4 py-6 text-center text-sm text-text-secondary">
+        © 2026 WaterSense — LGU Flood Monitoring System
+    </div>
+</footer>
 
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-text-secondary mb-2">Report Type</label>
-                    <select class="input w-full min-h-[44px]" id="customReportType">
-                        <option value="comprehensive">Comprehensive Analysis</option>
-                        <option value="water_level">Water Level Only</option>
-                        <option value="alert_summary">Alert Summary</option>
-                        <option value="sensor_status">Sensor Status</option>
-                    </select>
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-text-secondary mb-2">Include Data</label>
-                    <div class="space-y-2">
-                        <label class="flex items-center gap-2">
-                            <input type="checkbox" class="rounded min-w-[20px] min-h-[20px]" checked>
-                            <span class="text-sm">Water Level Readings</span>
-                        </label>
-                        <label class="flex items-center gap-2">
-                            <input type="checkbox" class="rounded min-w-[20px] min-h-[20px]" checked>
-                            <span class="text-sm">Alert History</span>
-                        </label>
-                        <label class="flex items-center gap-2">
-                            <input type="checkbox" class="rounded min-w-[20px] min-h-[20px]">
-                            <span class="text-sm">Sensor Telemetry</span>
-                        </label>
-                        <label class="flex items-center gap-2">
-                            <input type="checkbox" class="rounded min-w-[20px] min-h-[20px]" checked>
-                            <span class="text-sm">Notification Logs</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Report Format Selector -->
-            <div class="report-format-selector">
-                <label class="text-sm font-medium text-text-secondary">Format:</label>
-                <div class="flex gap-2 flex-wrap">
-                    <button class="format-btn min-h-[44px]" data-format="pdf">PDF</button>
-                    <button class="format-btn min-h-[44px]" data-format="excel">Excel</button>
-                    <button class="format-btn min-h-[44px]" data-format="csv">CSV</button>
-                </div>
-            </div>
-
-            <!-- Generate Button -->
-            <div class="mt-4">
-                <button id="generateReport" class="btn btn-primary w-full min-h-[44px]">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                    </svg>
-                    Generate Report
-                </button>
-            </div>
-        </div>
-
-        <!-- Bulk Actions -->
-        <div id="bulkActions" class="bulk-actions" style="display: none;">
-            <div class="selected-count">3 reports selected</div>
-            <div class="flex gap-2 w-full sm:w-auto">
-                <button id="downloadSelected" class="btn btn-outline flex-1 sm:flex-none min-h-[44px]">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                    </svg>
-                    Download
-                </button>
-                <button id="deleteSelected" class="btn btn-outline text-error-600 border-error-200 hover:bg-error-50 flex-1 sm:flex-none min-h-[44px]">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                    </svg>
-                    Delete
-                </button>
-            </div>
-        </div>
-
-        <!-- Available Reports Section -->
-        <div class="card card-comfortable">
-            <h2 class="text-lg font-semibold text-text-primary mb-4">Available Reports</h2>
-            
-            <div class="report-list">
-                <!-- Report Item 1 -->
-                <div class="report-item">
-                    <div class="report-checkbox">
-                        <input type="checkbox" class="report-select" data-report="1">
-                    </div>
-                    <div class="report-info">
-                        <div class="report-title">Daily Water Level Report</div>
-                        <div class="report-meta">
-                            <span>2025-11-20</span>
-                            <span>Daily</span>
-                            <span>245 KB</span>
-                        </div>
-                    </div>
-                    <div class="report-actions">
-                        <button class="btn btn-outline btn-sm min-h-[44px] px-3" data-action="download" data-report="1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                            </svg>
-                        </button>
-                        <button class="btn btn-outline btn-sm min-h-[44px] px-3" data-action="view" data-report="1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Report Item 2 -->
-                <div class="report-item">
-                    <div class="report-checkbox">
-                        <input type="checkbox" class="report-select" data-report="2">
-                    </div>
-                    <div class="report-info">
-                        <div class="report-title">Weekly Alert Summary</div>
-                        <div class="report-meta">
-                            <span>2025-11-18</span>
-                            <span>Weekly</span>
-                            <span>512 KB</span>
-                        </div>
-                    </div>
-                    <div class="report-actions">
-                        <button class="btn btn-outline btn-sm min-h-[44px] px-3" data-action="download" data-report="2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                            </svg>
-                        </button>
-                        <button class="btn btn-outline btn-sm min-h-[44px] px-3" data-action="view" data-report="2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Report Item 3 -->
-                <div class="report-item">
-                    <div class="report-checkbox">
-                        <input type="checkbox" class="report-select" data-report="3">
-                    </div>
-                    <div class="report-info">
-                        <div class="report-title">Daily Water Level Report</div>
-                        <div class="report-meta">
-                            <span>2025-11-19</span>
-                            <span>Daily</span>
-                            <span>238 KB</span>
-                        </div>
-                    </div>
-                    <div class="report-actions">
-                        <button class="btn btn-outline btn-sm min-h-[44px] px-3" data-action="download" data-report="3">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                            </svg>
-                        </button>
-                        <button class="btn btn-outline btn-sm min-h-[44px] px-3" data-action="view" data-report="3">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Report Item 4 -->
-                <div class="report-item">
-                    <div class="report-checkbox">
-                        <input type="checkbox" class="report-select" data-report="4">
-                    </div>
-                    <div class="report-info">
-                        <div class="report-title">Monthly System Report</div>
-                        <div class="report-meta">
-                            <span>2025-11-01</span>
-                            <span>Monthly</span>
-                            <span>1.2 MB</span>
-                        </div>
-                    </div>
-                    <div class="report-actions">
-                        <button class="btn btn-outline btn-sm min-h-[44px] px-3" data-action="download" data-report="4">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                            </svg>
-                        </button>
-                        <button class="btn btn-outline btn-sm min-h-[44px] px-3" data-action="view" data-report="4">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pagination -->
-            <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-border pt-4">
-                <div class="text-sm text-text-secondary text-center sm:text-left">
-                    Showing 4 of 42 reports
-                </div>
-                <div class="pagination">
-                    <button class="btn btn-outline btn-sm min-h-[44px]">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                        </svg>
-                    </button>
-                    <button class="btn btn-primary btn-sm min-h-[44px] px-3">1</button>
-                    <button class="btn btn-outline btn-sm min-h-[44px] px-3">2</button>
-                    <button class="btn btn-outline btn-sm min-h-[44px] px-3">3</button>
-                    <button class="btn btn-outline btn-sm min-h-[44px] px-3">...</button>
-                    <button class="btn btn-outline btn-sm min-h-[44px] px-3">5</button>
-                    <button class="btn btn-outline btn-sm min-h-[44px]">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-surface border-t border-border mt-8 sm:mt-12">
-        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p class="text-sm text-text-secondary text-center sm:text-left">© 2025 WaterSense Dashboard. All Rights Reserved.</p>
-                <div class="flex items-center gap-4">
-                    <a href="javascript:void(0)" class="text-sm text-text-secondary hover:text-primary transition-colors">Documentation</a>
-                    <a href="javascript:void(0)" class="text-sm text-text-secondary hover:text-primary transition-colors">Support</a>
-                    <a href="javascript:void(0)" class="text-sm text-text-secondary hover:text-primary transition-colors">Privacy Policy</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- END BODY CONTENT -->
-
-    <!-- Shared menu -->
-    <script src="../../js/shared/menu.js"></script>
-
-    <!-- Reports logic -->
-    <script src="../../js/staff/reports.js"></script>
-
-    <!-- External injector -->
-    <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+<!-- ================= JS ================= -->
+<script src="../../js/staff/reports.js"></script>
 
 </body>
 </html>
