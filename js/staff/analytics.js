@@ -85,17 +85,5 @@ function updateRefreshCountdown() {
 setInterval(updateRefreshCountdown, 1000);
 updateTimestamp();
 
-// ============================
-// SIMULATED SENSOR DATA
-// ============================
-setInterval(() => {
-    const palingonLevel = 68 + (Math.random() * 2 - 1);
-    const linggaLevel = 93 + (Math.random() * 2 - 1);
 
-    console.log(
-        'Simulated levels - Palingon:',
-        palingonLevel.toFixed(1),
-        'Lingga:',
-        linggaLevel.toFixed(1)
-    );
-}, 30000);
+

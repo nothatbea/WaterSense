@@ -60,16 +60,34 @@ formatBtns.forEach(btn => {
 // ============================
 // GENERATE REPORT
 // ============================
-document.getElementById('generateReport')
-    ?.addEventListener('click', () => {
+document.getElementById("generateReport")
+?.addEventListener("click", () => {
 
-        const type = document.querySelector('.report-type-card.active')?.dataset.type;
-        const format = document.querySelector('.format-btn.active')?.dataset.format;
+    const type = document.querySelector(".report-type-card.active")?.dataset.type;
+    const format = document.querySelector(".format-btn.active")?.dataset.format;
+    const locationId = 1; // Barangay Lingga
 
-        if (!type || !format) return alert('Select report type and format');
+    if (!type || !format) {
+        alert("Select report type and format");
+        return;
+    }
 
-        alert(`Generating ${type} report in ${format.toUpperCase()} format`);
-    });
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "https://steelblue-skunk-833121.hostingersite.com/api/reports/generate_report.php";
+
+    form.innerHTML = `
+        <input type="hidden" name="type" value="${type}">
+        <input type="hidden" name="format" value="${format}">
+        <input type="hidden" name="location_id" value="${locationId}">
+        <input type="hidden" name="start_date" value="${document.getElementById("startDate")?.value || ""}">
+        <input type="hidden" name="end_date" value="${document.getElementById("endDate")?.value || ""}">
+    `;
+
+    document.body.appendChild(form);
+    form.submit();
+});
+
 
 // ============================
 // BULK ACTIONS
