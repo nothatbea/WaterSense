@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
         messageBox.classList.add("hidden");
 
         if (username.value.trim() === "" || password.value.trim() === "") {
@@ -25,15 +24,27 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append("password", password.value);
 
         try {
-            const response = await fetch("../../api/auth/login.php", {
-                method: "POST",
-                body: formData
-            });
+            const response = await fetch(
+                "https://steelblue-skunk-833121.hostingersite.com/api/auth/login.php",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
 
-            const result = await response.json();
+            const text = await response.text();
+            console.log("LOGIN RAW RESPONSE:", text);
+
+            let result;
+            try {
+                result = JSON.parse(text);
+            } catch {
+                showMessage("Invalid server response");
+                return;
+            }
 
             if (!result.success) {
-                showMessage(result.message);
+                showMessage(result.message || "Login failed");
                 return;
             }
 
@@ -48,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 800);
 
         } catch (err) {
+            console.error(err);
             showMessage("Server error. Please try again.");
         }
     });
