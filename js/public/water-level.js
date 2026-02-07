@@ -46,7 +46,7 @@ async function fetchLatestWaterLevel() {
 fetchLatestWaterLevel();
 
 // ===== AUTO REFRESH (SAFETY NET) =====
-setInterval(fetchLatestWaterLevel, 30000);
+setInterval(fetchLatestWaterLevel, 5000);
 
 // ===== REALTIME UPDATE (WebSocket) =====
 const ws = new WebSocket("wss://watersense-backend.onrender.com");
