@@ -60,12 +60,9 @@ formatBtns.forEach(btn => {
 // ============================
 // GENERATE REPORT
 // ============================
-document.getElementById("generateReport")
-?.addEventListener("click", () => {
-
-    const type = document.querySelector(".report-type-card.active")?.dataset.type;
-    const format = document.querySelector(".format-btn.active")?.dataset.format;
-    const locationId = 1; // Barangay Lingga
+document.getElementById('generateReport')?.addEventListener('click', () => {
+    const type = document.querySelector('.report-type-card.active')?.dataset.type;
+    const format = document.querySelector('.format-btn.active')?.dataset.format;
 
     if (!type || !format) {
         alert("Select report type and format");
@@ -75,18 +72,29 @@ document.getElementById("generateReport")
     const form = document.createElement("form");
     form.method = "POST";
     form.action = "https://steelblue-skunk-833121.hostingersite.com/api/reports/generate_report.php";
+    form.target = "_blank";
 
-    form.innerHTML = `
-        <input type="hidden" name="type" value="${type}">
-        <input type="hidden" name="format" value="${format}">
-        <input type="hidden" name="location_id" value="${locationId}">
-        <input type="hidden" name="start_date" value="${document.getElementById("startDate")?.value || ""}">
-        <input type="hidden" name="end_date" value="${document.getElementById("endDate")?.value || ""}">
-    `;
+    const fields = {
+        report_type: type,
+        format: format,
+        location_id: 1, // Barangay Lingga
+        start_date: document.getElementById("startDate")?.value || "",
+        end_date: document.getElementById("endDate")?.value || ""
+    };
+
+    for (const key in fields) {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = fields[key];
+        form.appendChild(input);
+    }
 
     document.body.appendChild(form);
     form.submit();
+    document.body.removeChild(form);
 });
+
 
 
 // ============================
