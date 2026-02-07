@@ -1,4 +1,4 @@
-const API_URL = "https://steelblue-skunk-833121.hostingersite.com/api/sensors/latest.php";
+const API_URL = "https://watersense-backend.onrender.com/api/sensors/latest";
 
 // ===== DOM LOOKUPS (GLOBAL) =====
 const waterLevelText = document.getElementById("waterLevelText");
