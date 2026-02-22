@@ -110,6 +110,7 @@ async function fetchAnalytics(manual = false) {
     }
 
     renderTrend(data.timestamps, data.values);
+    updatePredictivePanel(data.predictive);
 
     updateTimestamp();
     refreshCountdown = AUTO_REFRESH_SECONDS;
@@ -122,6 +123,53 @@ async function fetchAnalytics(manual = false) {
 /*************************************************
  * RENDER SVG TREND LINE (LGU SAFE – TIME ACCURATE)
  *************************************************/
+function updatePredictivePanel(pred) {
+  if (!pred) return;
+
+  document.getElementById("currentLevel").textContent =
+    `${pred.current ?? "--"} cm`;
+
+  document.getElementById("rateRise").textContent =
+    `${pred.rate ?? "--"} cm/min`;
+
+  document.getElementById("predictedLevel").textContent =
+    `${pred.predicted_30min ?? "--"} cm`;
+
+  document.getElementById("earlyWarning").textContent =
+    pred.early_warning ? "YES" : "NO";
+
+  const badge = document.getElementById("predictiveBadge");
+  const explanation = document.getElementById("predictiveExplanation");
+
+  badge.className = "badge";
+
+  switch (pred.risk) {
+    case "CRITICAL":
+      badge.classList.add("badge-error");
+      badge.textContent = "CRITICAL";
+      break;
+    case "HIGH":
+      badge.classList.add("badge-warning");
+      badge.textContent = "HIGH RISK";
+      break;
+    case "MEDIUM":
+      badge.classList.add("badge-warning");
+      badge.textContent = "MEDIUM";
+      break;
+    default:
+      badge.classList.add("badge-success");
+      badge.textContent = "LOW";
+  }
+
+  if (pred.early_warning) {
+    explanation.textContent =
+      `Early warning triggered: projected to reach ${pred.predicted_30min} cm within 30 minutes.`;
+  } else {
+    explanation.textContent =
+      "Water level stable. No immediate flood risk detected.";
+  }
+}
+
 function renderTrend(timestamps, values) {
   if (!trendLine || !timestamps?.length) return;
 

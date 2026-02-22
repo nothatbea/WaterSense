@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="../../css/main.css">
 
     <!-- External modules (unchanged) -->
-    <script type="module" async src="https://l1nq.com/rvNGG"></script>
-    <script type="module" defer src="https://sl1nk.com/REegY"></script>
+   
 </head>
 
 <body class="bg-background min-h-screen">
@@ -128,9 +127,36 @@
 
         <!-- Main Visualization and Alert Panel -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+            
             <!-- Trend Analysis Chart (8 cols) -->
             <div class="lg:col-span-8 card card-comfortable">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
+                    <!-- Predictive Panel-->
+                    <div class="bg-secondary-50 rounded-md p-3 mb-4">
+                        <div class="flex flex-wrap items-center justify-between gap-4 text-sm">
+
+                            <div class="flex items-center gap-2">
+                                <span class="font-semibold">🔮 Predictive Insight:</span>
+                                <span id="predictiveBadge" class="badge badge-success">
+                                    LOW RISK
+                                </span>
+                            </div>
+
+                            <div class="flex items-center gap-6">
+                                <span>Current: <strong id="currentLevel">-- cm</strong></span>
+                                <span>Rate: <strong id="rateRise">-- cm/min</strong></span>
+                                <span>Predicted (30m): <strong id="predictedLevel">-- cm</strong></span>
+                                <span>Early Warning: <strong id="earlyWarning">No</strong></span>
+                            </div>
+                        </div>
+
+                        <div class="mt-2 text-xs text-text-secondary">
+                            <span id="predictiveExplanation">
+                                System analyzing water level trend...
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Chart -->
                     <div>
                         <h3 class="text-lg font-semibold text-text-primary">24-Hour Water Level Trend</h3>
                         <p class="text-sm text-text-secondary">Comparative analysis with historical patterns</p>
