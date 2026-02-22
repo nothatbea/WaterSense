@@ -17,7 +17,7 @@ const nextRefreshEl = document.getElementById("nextRefresh");
 
 const svg = document.querySelector("svg");
 const trendLine = document.getElementById("trendLine"); // main trend line
-const dataPoint = svg?.querySelector("circle");   // latest data point
+const dataPoint = document.getElementById("latestPoint");   // latest data point
 
 // Alert Summary counts
 const criticalCountEl = document.querySelector("[data-alert='EMERGENCY']");
@@ -185,9 +185,9 @@ function renderTrend(timestamps, values) {
   const Y_START = 50;
 
   // Convert HH:mm timestamps to epoch (same-day)
-  const times = timestamps.map(t =>
-    new Date(`1970-01-01T${t}:00`).getTime()
-  );
+ const times = timestamps.map(t =>
+  new Date(`1970-01-01T${t}`).getTime()
+);
 
   const minT = Math.min(...times);
   const maxT = Math.max(...times);
