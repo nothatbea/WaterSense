@@ -129,8 +129,10 @@ function updatePredictivePanel(pred) {
   document.getElementById("currentLevel").textContent =
     `${pred.current ?? "--"} cm`;
 
-  document.getElementById("rateRise").textContent =
-    `${pred.rate ?? "--"} cm/min`;
+  const perMinuteRate = pred.rate ? (pred.rate * 12).toFixed(2) : "--";
+
+document.getElementById("rateRise").textContent =
+  `${perMinuteRate} cm/min`;
 
   document.getElementById("predictedLevel").textContent =
     `${pred.predicted_30min ?? "--"} cm`;
