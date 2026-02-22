@@ -16,7 +16,7 @@ const lastUpdateEl = document.getElementById("lastUpdate");
 const nextRefreshEl = document.getElementById("nextRefresh");
 
 const svg = document.querySelector("svg");
-const trendLine = svg?.querySelector("polyline"); // main trend line
+const trendLine = document.getElementById("trendLine"); // main trend line
 const dataPoint = svg?.querySelector("circle");   // latest data point
 
 // Alert Summary counts
@@ -129,7 +129,10 @@ function updatePredictivePanel(pred) {
   document.getElementById("currentLevel").textContent =
     `${pred.current ?? "--"} cm`;
 
-  const perMinuteRate = pred.rate ? (pred.rate * 12).toFixed(2) : "--";
+  const perMinuteRate =
+  pred.rate !== null && pred.rate !== undefined
+    ? (pred.rate * 12).toFixed(2)
+    : "--";
 
 document.getElementById("rateRise").textContent =
   `${perMinuteRate} cm/min`;
