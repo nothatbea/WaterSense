@@ -184,22 +184,24 @@ function renderTrend(timestamps, values) {
   const X_START = 60;
   const Y_START = 50;
 
-  // Convert HH:mm timestamps to epoch (same-day)
- const times = timestamps.map(t =>
-  new Date(`1970-01-01T${t}`).getTime()
-);
+  // Convert HH:mm to timestamp
+  const times = timestamps.map(t =>
+    new Date(`1970-01-01T${t}:00`).getTime()
+  );
 
+  // 🔥 Fixed 24-hour bounds
   const startOfDay = new Date("1970-01-01T00:00:00").getTime();
-const endOfDay   = new Date("1970-01-01T23:59:00").getTime();
-
-
+  const endOfDay   = new Date("1970-01-01T23:59:00").getTime();
   const spanT = endOfDay - startOfDay;
 
   const points = values.map((val, i) => {
+
     const x =
-    X_START + ((times[i] - startOfDay) / spanT) * WIDTH;
+      X_START + ((times[i] - startOfDay) / spanT) * WIDTH;
+
     const y =
       Y_START + (1 - val / MAX_CM) * HEIGHT;
+
     return `${x.toFixed(1)},${y.toFixed(1)}`;
   });
 
@@ -208,8 +210,10 @@ const endOfDay   = new Date("1970-01-01T23:59:00").getTime();
   // Latest data point
   if (dataPoint) {
     const lastIndex = values.length - 1;
+
     const cx =
-      X_START + ((times[lastIndex] - minT) / spanT) * WIDTH;
+      X_START + ((times[lastIndex] - startOfDay) / spanT) * WIDTH;
+
     const cy =
       Y_START + (1 - values[lastIndex] / MAX_CM) * HEIGHT;
 
