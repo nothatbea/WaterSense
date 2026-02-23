@@ -189,13 +189,15 @@ function renderTrend(timestamps, values) {
   new Date(`1970-01-01T${t}`).getTime()
 );
 
-  const minT = Math.min(...times);
-  const maxT = Math.max(...times);
-  const spanT = maxT - minT || 1;
+  const startOfDay = new Date("1970-01-01T00:00:00").getTime();
+const endOfDay   = new Date("1970-01-01T23:59:00").getTime();
+
+
+  const spanT = endOfDay - startOfDay;
 
   const points = values.map((val, i) => {
     const x =
-      X_START + ((times[i] - minT) / spanT) * WIDTH;
+    X_START + ((times[i] - startOfDay) / spanT) * WIDTH;
     const y =
       Y_START + (1 - val / MAX_CM) * HEIGHT;
     return `${x.toFixed(1)},${y.toFixed(1)}`;
