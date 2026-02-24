@@ -148,33 +148,33 @@ document.getElementById("rateRise").textContent =
   const badge = document.getElementById("predictiveBadge");
   const explanation = document.getElementById("predictiveExplanation");
 
-  badge.className = "badge";
+  badge.className = "badge px-2 py-1 text-xs font-semibold rounded";
 
-  switch (pred.risk) {
+switch (pred.risk) {
 
   case "EMERGENCY":
-    badge.classList.add("badge-error");
+    badge.classList.add("bg-error-100", "text-error-700");
     badge.textContent = "EMERGENCY";
     break;
 
   case "DANGER":
-    badge.classList.add("badge-error");
+    badge.classList.add("bg-error-50", "text-error-600");
     badge.textContent = "DANGER";
     break;
 
   case "WARNING":
-    badge.classList.add("badge-warning");
+    badge.classList.add("bg-warning-50", "text-warning-600");
     badge.textContent = "WARNING";
     break;
 
   case "CAUTION":
-    badge.classList.add("badge-warning");
+    badge.classList.add("bg-warning-100", "text-warning-700");
     badge.textContent = "CAUTION";
     break;
 
   case "NORMAL":
   default:
-    badge.classList.add("badge-success");
+    badge.classList.add("bg-success-50", "text-success-600");
     badge.textContent = "LOW";
 }
   if (pred.early_warning) {
