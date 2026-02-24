@@ -133,7 +133,7 @@ function updatePredictivePanel(pred) {
 
   const perMinuteRate =
   pred.rate !== null && pred.rate !== undefined
-    ? (pred.rate * 12).toFixed(2)
+    ? pred.rate.toFixed(2)
     : "--";
 
 document.getElementById("rateRise").textContent =
@@ -151,23 +151,32 @@ document.getElementById("rateRise").textContent =
   badge.className = "badge";
 
   switch (pred.risk) {
-    case "CRITICAL":
-      badge.classList.add("badge-error");
-      badge.textContent = "CRITICAL";
-      break;
-    case "HIGH":
-      badge.classList.add("badge-warning");
-      badge.textContent = "HIGH RISK";
-      break;
-    case "MEDIUM":
-      badge.classList.add("badge-warning");
-      badge.textContent = "MEDIUM";
-      break;
-    default:
-      badge.classList.add("badge-success");
-      badge.textContent = "LOW";
-  }
 
+  case "EMERGENCY":
+    badge.classList.add("badge-error");
+    badge.textContent = "EMERGENCY";
+    break;
+
+  case "DANGER":
+    badge.classList.add("badge-error");
+    badge.textContent = "DANGER";
+    break;
+
+  case "WARNING":
+    badge.classList.add("badge-warning");
+    badge.textContent = "WARNING";
+    break;
+
+  case "CAUTION":
+    badge.classList.add("badge-warning");
+    badge.textContent = "CAUTION";
+    break;
+
+  case "NORMAL":
+  default:
+    badge.classList.add("badge-success");
+    badge.textContent = "LOW";
+}
   if (pred.early_warning) {
     explanation.textContent =
       `Early warning triggered: projected to reach ${pred.predicted_30min} cm within 30 minutes.`;
