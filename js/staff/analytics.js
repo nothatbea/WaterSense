@@ -17,7 +17,9 @@ const nextRefreshEl = document.getElementById("nextRefresh");
 
 const svg = document.querySelector("svg");
 const trendLine = document.getElementById("trendLine"); // main trend line
+
 const dataPoint = document.getElementById("latestPoint");   // latest data point
+const projectionLine = document.getElementById("projectionLine");
 
 // Alert Summary counts
 const criticalCountEl = document.querySelector("[data-alert='EMERGENCY']");
@@ -194,6 +196,9 @@ function renderTrend(timestamps, values) {
   const endOfDay   = new Date("1970-01-01T23:59:00").getTime();
   const spanT = endOfDay - startOfDay;
 
+  // ------------------------
+  // MAIN TREND LINE
+  // ------------------------
   const points = values.map((val, i) => {
 
     const x =
@@ -207,7 +212,9 @@ function renderTrend(timestamps, values) {
 
   trendLine.setAttribute("points", points.join(" "));
 
-  // Latest data point
+  // ------------------------
+  // LATEST DATA POINT
+  // ------------------------
   if (dataPoint) {
     const lastIndex = values.length - 1;
 
@@ -219,6 +226,42 @@ function renderTrend(timestamps, values) {
 
     dataPoint.setAttribute("cx", cx);
     dataPoint.setAttribute("cy", cy);
+  }
+
+  // ========================
+  // 🔵 PROJECTION LINE (ADD THIS PART)
+  // ========================
+  if (projectionLine && values.length >= 2) {
+
+    const lastIndex = values.length - 1;
+
+    const lastValue = values[lastIndex];
+    const prevValue = values[lastIndex - 1];
+
+    const rate = lastValue - prevValue; // cm per minute
+
+    const futureMinutes = 30;
+    const futureValue = lastValue + (rate * futureMinutes);
+
+    const lastTime = times[lastIndex];
+    const futureTime = lastTime + (futureMinutes * 60 * 1000);
+
+    const x1 =
+      X_START + ((lastTime - startOfDay) / spanT) * WIDTH;
+
+    const y1 =
+      Y_START + (1 - lastValue / MAX_CM) * HEIGHT;
+
+    const x2 =
+      X_START + ((futureTime - startOfDay) / spanT) * WIDTH;
+
+    const y2 =
+      Y_START + (1 - futureValue / MAX_CM) * HEIGHT;
+
+    projectionLine.setAttribute(
+      "points",
+      `${x1.toFixed(1)},${y1.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}`
+    );
   }
 }
 

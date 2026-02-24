@@ -160,7 +160,7 @@
                     <!-- Chart -->
                     <div>
                         <h3 class="text-lg font-semibold text-text-primary">24-Hour Water Level Trend</h3>
-                        <p class="text-sm text-text-secondary">Comparative analysis with historical patterns</p>
+                        
                     </div>
                     <div class="flex items-center gap-2">
                         <button class="btn btn-outline py-2 px-3 text-sm">
@@ -202,6 +202,7 @@
                         <!-- Threshold Lines -->
                         <line x1="60" y1="110" x2="760" y2="110" stroke="#DC2626" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
                         <line x1="60" y1="170" x2="760" y2="170" stroke="#D97706" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+                        <line x1="60" y1="230" x2="760" y2="230" stroke="#94A3B8" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
 
                         <!-- Barangay Lingga Line (Current) -->
                         <polyline id="trendLine"
@@ -212,9 +213,17 @@
                             stroke-linecap="round"
                             stroke-linejoin="round"/>
 
+                        <polyline id="projectionLine"
+                            points=""
+                            fill="none"
+                            stroke="#2563EB"
+                            stroke-width="3"
+                            stroke-dasharray="6,6"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"/>
+
                         <!-- Historical Pattern (Dashed) -->
-                        <polyline points="60,210 120,208 180,205 240,202 300,200 360,198 420,195 480,198 540,200 600,202 660,205 720,208 760,210" 
-                                  fill="none" stroke="#94A3B8" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+                        
 
                         <!-- Data Point -->
                         <circle id="latestPoint"
